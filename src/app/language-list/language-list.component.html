@@ -1,0 +1,58 @@
+<div>
+  <div class="container" style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="primary" [routerLink]="['add']" routerLinkActive="active">Add Language</button>
+  </div>
+  <br>
+
+  <div class="container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="creators">
+        <th mat-header-cell *matHeaderCellDef> Creators </th>
+        <td mat-cell *matCellDef="let element"> {{element.creators | parseArray}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="extensions">
+        <th mat-header-cell *matHeaderCellDef> Extensions </th>
+        <td mat-cell *matCellDef="let element"> {{element.extensions | parseArray}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="firstAppeared">
+        <th mat-header-cell *matHeaderCellDef> First Appeared </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstAppeared | date: "MM/dd/yyyy": "UTC" | empty }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> Year </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="wiki">
+        <th mat-header-cell *matHeaderCellDef> Wiki </th>
+        <td mat-cell *matCellDef="let element"> <a href="{{element.wiki}}"> {{element.wiki}} </a> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element"> <a [routerLink]="['edit', element._id]" routerLinkActive="active"> <mat-icon aria-hidden="false" aria-label="Edit icon" fontIcon="edit" style="color: black;"> </mat-icon> </a> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element"> <mat-icon aria-hidden="false" aria-label="Delete icon" fontIcon="delete" style="color: black; cursor: pointer;"> </mat-icon> </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, dataSource.data.length]"
+                  showFirstLastButtons
+                  aria-label="Select page of programming languages">
+    </mat-paginator>
+  </div>
+</div>
