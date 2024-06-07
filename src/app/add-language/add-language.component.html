@@ -1,0 +1,61 @@
+<div style="display: flex; justify-content: center;">
+    <form [formGroup]="form">
+        <div>
+            <mat-form-field appearance="outline" hideRequiredMarker="true">
+                <mat-label>Name</mat-label>
+                <input matInput id="name" type="text" formControlName="name" [errorStateMatcher]="matcher">
+            </mat-form-field>
+        </div>
+        
+
+        <div formArrayName="creators">
+            <div *ngFor="let creator of creators.controls; let i=index; let first=first; let last=last;">
+                <mat-form-field appearance="outline" style="padding-right: 16px; width: 212px;" hideRequiredMarker="true">
+                    <mat-label>Creator</mat-label>
+                    <input matInput id="creator-{{ i }}" type="text" [formControlName]="i" formControlName="creators" [errorStateMatcher]="matcher">
+                    <mat-icon *ngIf="!first" matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeCreator(i)"> </mat-icon>
+                </mat-form-field>
+                <ng-container *ngIf="last"><button mat-raised-button color="primary" (click)="addCreator()">+ Add another creator</button></ng-container>
+            </div>
+            
+        </div>
+
+        <div formArrayName="extensions">
+            <div *ngFor="let extension of extensions.controls; let i=index; let first=first; let last=last;">
+                <mat-form-field appearance="outline" style="padding-right: 16px; width: 212px;" hideRequiredMarker="true">
+                    <mat-label>Extension</mat-label>
+                    <input matInput id="extension-{{ i }}" type="text" [formControlName]="i" formControlName="extensions" [errorStateMatcher]="matcher">
+                    <mat-icon *ngIf="!first" matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeExtension(i)"> </mat-icon>
+                </mat-form-field>
+                <ng-container *ngIf="last"><button mat-raised-button color="primary" (click)="addExtension()">+ Add another extension</button></ng-container>
+            </div>
+        </div>
+
+        <div>
+            <mat-form-field appearance="outline" hideRequiredMarker="true" style="width: 212px;">
+                <mat-label>First Appeared</mat-label>
+                <input matInput id="firstAppeared" formControlName="firstAppeared" [matDatepicker]="picker" [errorStateMatcher]="matcher">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="outline" hideRequiredMarker="true">
+                <mat-label>Year</mat-label>
+                <input matInput type="number" appDigitOnly pattern="\d+" [min]="0" id="year" formControlName="year" [errorStateMatcher]="matcher">
+            </mat-form-field>
+        </div>
+        
+        
+        <div>
+            <mat-form-field appearance="outline" hideRequiredMarker="true">
+                <mat-label>Wiki</mat-label>
+                <input matInput id="wiki" type="url" formControlName="wiki" [errorStateMatcher]="matcher">
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Add Language</button>
+    </form>
+</div>
+  

@@ -1,17 +1,17 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges, } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appDigitOnly]',
 })
 export class DigitOnlyDirective implements OnChanges {
-  @Input() decimal = false;
-  @Input() decimalSeparator = '.';
-  @Input() min = -Infinity;
-  @Input() max = Infinity;
+  @Input() decimal: boolean = false;
+  @Input() decimalSeparator: string = '.';
+  @Input() min: number = -Infinity;
+  @Input() max: number = Infinity;
   @Input() pattern: string | RegExp = '';
   inputElement: HTMLInputElement;
-  private hasDecimalPoint = false;
-  private navigationKeys = [
+  private hasDecimalPoint: boolean = false;
+  private navigationKeys: string[] = [
     'Backspace',
     'Delete',
     'Tab',
@@ -25,7 +25,7 @@ export class DigitOnlyDirective implements OnChanges {
     'Copy',
     'Paste',
   ];
-  private regex: RegExp = new RegExp('');
+  private regex: RegExp | null = null;
 
   constructor(public el: ElementRef) {
     this.inputElement = el.nativeElement;
@@ -33,16 +33,16 @@ export class DigitOnlyDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['pattern']) {
-      this.regex = RegExp(this.pattern);
+      this.regex = this.pattern ? RegExp(this.pattern) : null;
     }
 
     if (changes['min']) {
-      const maybeMin = Number(this.min);
+      const maybeMin: number = Number(this.min);
       this.min = isNaN(maybeMin) ? -Infinity : maybeMin;
     }
 
     if (changes['max']) {
-      const maybeMax = Number(this.max);
+      const maybeMax: number = Number(this.max);
       this.max = isNaN(maybeMax) ? Infinity : maybeMax;
     }
   }
@@ -71,7 +71,7 @@ export class DigitOnlyDirective implements OnChanges {
     }
 
     // check the input pattern RegExp
-    if (this.regex) {
+    if (!!this.regex) {
       if (!this.regex.test(this.forecastValue(e.key))) {
         e.preventDefault();
       }
