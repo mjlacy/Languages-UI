@@ -22,3 +22,7 @@ export interface LanguageForm {
   year: FormControl<number>;
   wiki: FormControl<string>;
 }
+
+export interface DeleteDialogData {
+  language: Language;
+}

@@ -79,7 +79,7 @@ export class DigitOnlyDirective implements OnChanges {
 
     const newValue: number = Number(this.forecastValue(e.key));
 
-    if (newValue > this.max || newValue < this.min) {
+    if (newValue > this.max/* || newValue < this.min*/) {
       e.preventDefault();
     }
   }
@@ -168,7 +168,7 @@ export class DigitOnlyDirective implements OnChanges {
     return selection
       ? oldValue.replace(selection, key)
       : oldValue.substring(0, selectionStart) +
-      key +
-      oldValue.substring(selectionStart);
+      oldValue.substring(selectionStart) +
+      key;
   }
 }

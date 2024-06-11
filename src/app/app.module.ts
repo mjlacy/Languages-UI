@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LanguageListComponent } from './language-list/language-list.component';
 import { AddLanguageComponent } from './add-language/add-language.component';
-// import { EditLanguageComponent } from './edit-language/edit-language.component';
-// import { DeleteLanguageComponent } from './delete-language/delete-language.component';
+import { EditLanguageComponent } from './edit-language/edit-language.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -18,10 +17,13 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { NgVarDirective } from './shared/directives/ngVar/ngVar-directive';
 import { DigitOnlyDirective } from './shared/directives/digit-only/digit-only-directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteLanguageComponent } from './delete-language/delete-language.component';
+import { MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,9 @@ import { DigitOnlyDirective } from './shared/directives/digit-only/digit-only-di
     LanguageListComponent,
     AddLanguageComponent,
     DigitOnlyDirective,
-    NgVarDirective
-    // EditLanguageComponent,
-    // DeleteLanguageComponent
+    NgVarDirective,
+    EditLanguageComponent,
+    DeleteLanguageComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,11 @@ import { DigitOnlyDirective } from './shared/directives/digit-only/digit-only-di
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose
   ],
   providers: [
     provideClientHydration(),

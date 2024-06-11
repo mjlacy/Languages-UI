@@ -1,4 +1,5 @@
-<div style="display: flex; justify-content: center;">
+@if (!loading) {
+    <div style="display: flex; justify-content: center;">
     <form [formGroup]="form">
         <div [style.margin-bottom]="!!form.get('name')?.errors && form.get('name')?.touched ? '15px' : ''">
             <mat-form-field appearance="outline" hideRequiredMarker="true">
@@ -9,7 +10,8 @@
                 }
             </mat-form-field>
         </div>
-
+        
+        
         <div formArrayName="creators">
             @for(creator of creators.controls; track creator; let i=$index; let first=$first; let last=$last;) {
                 <div [style.margin-bottom]="!!creator?.errors && creator.touched ? '15px' : ''">
@@ -24,34 +26,35 @@
                         }
                     </mat-form-field>
                     @if (last) {
-                        <ng-container><button mat-raised-button color="primary" (click)="addCreator()">+ Add another creator</button></ng-container>
+                        <ng-container>
+                            <button mat-raised-button color="primary" (click)="addCreator()">+ Add another creator</button>
+                        </ng-container>
                     }
                 </div>
             }
-            
         </div>
 
         <div formArrayName="extensions">
             @for(extension of extensions.controls; track extension; let i=$index; let first=$first; let last=$last;) {
                 <div [style.margin-bottom]="!!extension?.errors && extension.touched ? extension.hasError('required') ? '15px' : '45px' : ''">
-                <mat-form-field appearance="outline" style="padding-right: 16px; width: 212px;" hideRequiredMarker="true">
-                    <mat-label>Extension</mat-label>
-                    <input matInput id="extension-{{ i }}" type="text" [formControlName]="i" formControlName="extensions" [errorStateMatcher]="matcher">
-                    @if (!first) {
-                        <mat-icon matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeExtension(i)"> </mat-icon>
+                    <mat-form-field appearance="outline" style="padding-right: 16px; width: 212px;" hideRequiredMarker="true">
+                        <mat-label>Extension</mat-label>
+                        <input matInput id="extension-{{ i }}" type="text" [formControlName]="i" formControlName="extensions" [errorStateMatcher]="matcher">
+                        @if (!first) {
+                            <mat-icon matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeExtension(i)"> </mat-icon>
+                        }
+                        @if (extension.hasError('required')) {
+                            <mat-error>Extension is required</mat-error>
+                        } @else if (extension.hasError('pattern')) {
+                            <mat-error>Extension must start with a dot and contain no spaces or special characters</mat-error>
+                        }
+                    </mat-form-field>
+                    @if (last) {
+                        <ng-container>
+                            <button mat-raised-button color="primary" (click)="addExtension()">+ Add another extension</button>
+                        </ng-container>
                     }
-                    @if (extension.hasError('required')) {
-                        <mat-error>Extension is required</mat-error>
-                    } @else if (extension.hasError('pattern')) {
-                        <mat-error>Extension must start with a dot and contain no spaces or special characters</mat-error>
-                    }
-                </mat-form-field>
-                @if (last) {
-                    <ng-container>
-                        <button mat-raised-button color="primary" (click)="addExtension()">+ Add another extension</button>
-                    </ng-container>
-                }
-            </div>
+                </div>
             }
         </div>
 
@@ -72,13 +75,13 @@
         <div [style.margin-bottom]="!!form.get('year')?.errors && form.get('year')?.touched ? form.get('year')?.hasError('min') || form.get('year')?.hasError('required') ? '15px' : '30px' : ''">
             <mat-form-field appearance="outline" hideRequiredMarker="true">
                 <mat-label>Year</mat-label>
-                <input matInput type="number" appDigitOnly pattern="\d+" [min]="1900" [max]=currentYear id="year" formControlName="year" [errorStateMatcher]="matcher">
+                <input matInput type="number" appDigitOnly pattern="\d+" [min]="0" [max]=currentYear id="year" formControlName="year" [errorStateMatcher]="matcher">
                 @if (form.get('year')?.hasError('required')) {
                     <mat-error>Year is required</mat-error>
                 } @else if (form.get('year')?.hasError('max')) {
                     <mat-error>Year must not exceed current year</mat-error>
                 } @else if (form.get('year')?.hasError('min')) {
-                    <mat-error>Year must be at least 1900</mat-error>
+                    <mat-error>Year must be at least 0</mat-error>
                 } @else if (form.get('year')?.hasError('pattern')) {
                     <mat-error>Year must not contain a decimal point</mat-error>
                 }
@@ -101,4 +104,10 @@
         <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Add Language</button>
     </form>
 </div>
-  
+} @else {
+<ng-template>
+    <div style="display: flex; justify-content: center;">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
+}

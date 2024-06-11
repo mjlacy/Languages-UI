@@ -1,0 +1,6 @@
+<h2 mat-dialog-title style="margin-left: 25px;">Delete {{data.language.name}}?</h2>
+<mat-dialog-content>This cannot be undone.</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">Delete</button>
+</mat-dialog-actions>

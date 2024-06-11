@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LanguageListComponent } from './language-list/language-list.component';
 import { AddLanguageComponent } from './add-language/add-language.component';
-// import { EditLanguageComponent } from './edit-language/edit-language.component';
-// import { DeleteLanguageComponent } from './delete-language/delete-language.component';
+import { EditLanguageComponent } from './edit-language/edit-language.component';
 
 const routes: Routes = [
   {
@@ -14,14 +13,10 @@ const routes: Routes = [
     path: 'add',
     component: AddLanguageComponent,
   },
-  // {
-  //   path: 'edit/:_id',
-  //   component: EditLanguageComponent,
-  // },
-  // {
-  //   path: 'delete',
-  //   component: DeleteLanguageComponent,
-  // },
+  {
+    path: 'edit/:_id',
+    component: EditLanguageComponent,
+  },
   { path: '**', component: LanguageListComponent }
 ];
 
