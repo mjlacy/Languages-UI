@@ -17,7 +17,6 @@ import { DeleteLanguageComponent } from '../delete-language/delete-language.comp
 export class LanguageListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
   dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>([]);
-  loading: boolean = true;
 
   constructor(private languageService: LanguageService, public dialog: MatDialog) {}
 
@@ -34,7 +33,6 @@ export class LanguageListComponent implements AfterViewInit {
       .subscribe({
         next: (languages: Languages) => {
           this.dataSource.data = languages.languages;
-          this.loading = false;
       },
         error: (error: HttpErrorResponse) => {
           console.log(error);
