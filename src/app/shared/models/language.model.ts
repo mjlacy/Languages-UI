@@ -1,7 +1,9 @@
 import { FormArray, FormControl } from "@angular/forms";
 
-export interface Languages {
+export interface LanguagesResp {
   languages: Language[];
+  links: Link[];
+  total: number;
 }
 
 export interface Language {
@@ -12,6 +14,15 @@ export interface Language {
   firstAppeared: Date;
   year: number;
   wiki: string;
+}
+
+export interface LanguageHATEOAS extends Language {
+  links: Link[];
+}
+
+export interface Link {
+  rel: string;
+  href: string;
 }
 
 export interface LanguageForm {

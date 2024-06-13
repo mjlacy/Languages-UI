@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Language, Languages } from '../shared/models/language.model';
+import { Language, LanguagesResp } from '../shared/models/language.model';
 import { LanguageService } from '../services/language.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Observable, catchError, filter, map, of, startWith, switchMap, tap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
 
 @Component({
@@ -16,28 +15,44 @@ import { DeleteLanguageComponent } from '../delete-language/delete-language.comp
 })
 export class LanguageListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
-  dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>([]);
+  dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
+  total: number = 0;
 
   constructor(private languageService: LanguageService, public dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator as MatPaginator;
+    const paginator = this.paginator as MatPaginator
 
-    this.getLanguages();
+    this.dataSource.paginator = paginator;
+
+    paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          return this.getLanguages(
+            paginator.pageSize,
+            paginator.pageIndex + 1
+          ).pipe(
+            catchError(() => of(null))
+          );
+        }),
+        map((languages: LanguagesResp | null) => {
+          if (languages == null) {
+            return [];
+          }
+          this.total = languages.total;
+          return languages.languages;
+        })
+      )
+      .subscribe((languages: Language[]) => {
+        this.dataSource = new MatTableDataSource(languages);
+      });
   }
 
-  getLanguages(): void {
-    this.languageService.getLanguages()
-      .subscribe({
-        next: (languages: Languages) => {
-          this.dataSource.data = languages.languages;
-      },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-        }
-    });
+  getLanguages(size: number = 5, page: number = 1): Observable<LanguagesResp> {
+    return this.languageService.getLanguages({size, page});
   }
 
   openDialog(language: Language): void {
@@ -50,18 +65,26 @@ export class LanguageListComponent implements AfterViewInit {
     dialogRef
     .afterClosed()
     .pipe(
-      switchMap((confirmDelete: boolean) => {
-        if (confirmDelete) {
-          return this.languageService.deleteLanguage(language._id as string);
-        } else {
-          return of(null);
-        }
-      }),
-      tap(() => this.getLanguages()),
+      filter((confirmDelete: boolean) => confirmDelete),
+      switchMap((_: boolean) => {
+        return this.languageService.deleteLanguage(language._id as string);
+      })
     ).subscribe({
-      next: () => {},
+      next: () => {
+        const paginator: MatPaginator = this.paginator as MatPaginator;
+
+        if ((paginator.pageSize * paginator.pageIndex) === (paginator.length - 1)) {
+          paginator.pageIndex -= 1;
+        }
+
+        paginator.page.next({
+          pageIndex: paginator.pageIndex,
+          pageSize: paginator.pageSize,
+          length: paginator.length
+        });
+      },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
+        console.error(error);
       }
     });
   }
