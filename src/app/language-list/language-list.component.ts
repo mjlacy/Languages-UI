@@ -5,8 +5,7 @@ import { LanguageService } from '../services/language.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
 
 @Component({
@@ -16,7 +15,7 @@ import { DeleteLanguageComponent } from '../delete-language/delete-language.comp
 })
 export class LanguageListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
-  dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>([]);
+  dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
 
   constructor(private languageService: LanguageService, public dialog: MatDialog) {}
 
@@ -50,16 +49,13 @@ export class LanguageListComponent implements AfterViewInit {
     dialogRef
     .afterClosed()
     .pipe(
-      switchMap((confirmDelete: boolean) => {
-        if (confirmDelete) {
-          return this.languageService.deleteLanguage(language._id as string);
-        } else {
-          return of(null);
-        }
-      }),
-      tap(() => this.getLanguages()),
+      filter((confirmDelete: boolean) => confirmDelete),
+      switchMap((_: boolean) => this.languageService.deleteLanguage(language._id as string))
     ).subscribe({
-      next: () => {},
+      next: () => {
+        this.dataSource.data.splice(this.dataSource.data.indexOf(language), 1);
+        this.dataSource.paginator = this.paginator as MatPaginator;
+      },
       error: (error: HttpErrorResponse) => {
         console.log(error);
       }

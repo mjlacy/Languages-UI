@@ -7,7 +7,9 @@ import { NgVarDirective } from "./ngVar-directive";
   template: `
     <div *ngVar="'Test' as TEST">
       <h1>{{ TEST }}</h1>
-      <h2 *ngIf="TEST">{{ TEST }} 2</h2>
+      @if (TEST) {
+        <h2>{{ TEST }} 2</h2>
+      }
     </div>
   `
 })
