@@ -35,7 +35,7 @@ export class LanguageListComponent implements AfterViewInit {
           this.dataSource.data = languages.languages;
       },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.error(error);
         }
     });
   }
@@ -58,7 +58,7 @@ export class LanguageListComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator as MatPaginator;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
+        console.error(error);
       }
     });
   }

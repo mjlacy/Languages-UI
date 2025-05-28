@@ -79,7 +79,7 @@ export class AddLanguageComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.error(error);
         }
       });
   }
