@@ -9,9 +9,10 @@ import { filter, switchMap } from 'rxjs/operators';
 import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
 
 @Component({
-  selector: 'app-language-list',
-  templateUrl: './language-list.component.html',
-  styleUrl: './language-list.component.scss'
+    selector: 'app-language-list',
+    templateUrl: './language-list.component.html',
+    styleUrl: './language-list.component.scss',
+    standalone: false
 })
 export class LanguageListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];

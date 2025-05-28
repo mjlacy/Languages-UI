@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appDigitOnly]',
+    selector: '[appDigitOnly]',
+    standalone: false
 })
 export class DigitOnlyDirective implements OnChanges {
   @Input() decimal: boolean = false;
