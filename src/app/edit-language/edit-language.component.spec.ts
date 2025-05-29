@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditLanguageComponent } from './edit-language.component';
 
 describe('EditLanguageComponent', () => {
@@ -11,7 +10,7 @@ describe('EditLanguageComponent', () => {
       declarations: [EditLanguageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(EditLanguageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Language, Languages } from '../shared/models/language.model';
 import { LanguageService } from '../services/language.service';
@@ -14,7 +14,7 @@ import { DeleteLanguageComponent } from '../delete-language/delete-language.comp
     styleUrl: './language-list.component.scss',
     standalone: false
 })
-export class LanguageListComponent implements AfterViewInit {
+export class LanguageListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
   dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
 
@@ -22,10 +22,12 @@ export class LanguageListComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
+  ngOnInit(): void {
+    this.getLanguages();
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator as MatPaginator;
-
-    this.getLanguages();
   }
 
   getLanguages(): void {
