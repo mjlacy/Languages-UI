@@ -14,9 +14,10 @@ class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-edit-language',
-  templateUrl: './edit-language.component.html',
-  styleUrl: './edit-language.component.scss'
+    selector: 'app-edit-language',
+    templateUrl: './edit-language.component.html',
+    styleUrl: './edit-language.component.scss',
+    standalone: false
 })
 export class EditLanguageComponent implements OnInit {
   currentDate: Date = new Date();
@@ -59,7 +60,7 @@ export class EditLanguageComponent implements OnInit {
           this.loading = false;
       },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.error(error);
         }
     });
   }
@@ -105,7 +106,7 @@ export class EditLanguageComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.error(error);
         }
       });
   }

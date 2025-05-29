@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Language, Languages } from '../shared/models/language.model';
 import { LanguageService } from '../services/language.service';
@@ -9,11 +9,12 @@ import { filter, switchMap } from 'rxjs/operators';
 import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
 
 @Component({
-  selector: 'app-language-list',
-  templateUrl: './language-list.component.html',
-  styleUrl: './language-list.component.scss'
+    selector: 'app-language-list',
+    templateUrl: './language-list.component.html',
+    styleUrl: './language-list.component.scss',
+    standalone: false
 })
-export class LanguageListComponent implements AfterViewInit {
+export class LanguageListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
   dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
 
@@ -21,10 +22,12 @@ export class LanguageListComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
+  ngOnInit(): void {
+    this.getLanguages();
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator as MatPaginator;
-
-    this.getLanguages();
   }
 
   getLanguages(): void {
@@ -34,7 +37,7 @@ export class LanguageListComponent implements AfterViewInit {
           this.dataSource.data = languages.languages;
       },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.error(error);
         }
     });
   }
@@ -57,7 +60,7 @@ export class LanguageListComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator as MatPaginator;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
+        console.error(error);
       }
     });
   }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LanguageListComponent } from './language-list.component';
 
 describe('LanguageListComponent', () => {
@@ -11,7 +10,7 @@ describe('LanguageListComponent', () => {
       declarations: [LanguageListComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(LanguageListComponent);
     component = fixture.componentInstance;
   });

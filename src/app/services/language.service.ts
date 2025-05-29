@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '@environments/environment';
 import { first } from 'rxjs/operators';
 import { Language, Languages } from '../shared/models/language.model';
 
@@ -16,7 +16,7 @@ export class LanguageService {
   constructor(private httpClient: HttpClient) {}
 
   getLanguages({name = '', creators = [], extensions = [], firstAppeared = '', year = 0, wiki= ''} = {}): Observable<Languages> {
-    const queryString = '?' + (!!name ? `name=${name}&` : '') + (!!creators.length ? `creators=${creators.toString()}&` : '') +
+    const queryString: string = '?' + (!!name ? `name=${name}&` : '') + (!!creators.length ? `creators=${creators.toString()}&` : '') +
       (!!extensions.length ? `extensions=${extensions.toString()}&` : '') + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : '') +
       (!!year ? `year=${year}&` : '') + (!!wiki ? `wiki=${wiki}&` : '');
 
