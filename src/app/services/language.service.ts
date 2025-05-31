@@ -15,10 +15,16 @@ export class LanguageService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getLanguages({name = "", creators = [], extensions = [], firstAppeared = "", year = 0, wiki= ""} = {}): Observable<Languages> {
-    const queryString: string = "?" + (!!name ? `name=${name}&` : "") + (!!creators.length ? `creators=${creators.toString()}&` : "") +
-      (!!extensions.length ? `extensions=${extensions.toString()}&` : "") + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : "") +
-      (!!year ? `year=${year}&` : "") + (!!wiki ? `wiki=${wiki}&` : "");
+  getLanguages(lang?: Language): Observable<Languages> {
+    let queryString: string = "?" + (!!lang?.name ? `name=${lang.name}&` : "") + (!!lang?.creators?.length ? `creators=${lang?.creators.toString()}&` : "") +
+      (!!lang?.extensions?.length ? `extensions=${lang?.extensions.toString()}&` : "") + (!!lang?.firstAppeared ? `firstAppeared=${lang?.firstAppeared.toISOString()}&` : "") +
+      (!!lang?.year ? `year=${lang?.year}&` : "") + (!!lang?.wiki ? `wiki=${lang?.wiki}&` : "");
+
+    if (queryString === "?") {
+      queryString = "";
+    } else if (queryString.endsWith("&")) {
+      queryString = queryString.slice(0, -1);
+    }
 
     return this.httpClient.get<Languages>(`${this.LANGUAGE_API_URL}${queryString}`).pipe(first());
   }

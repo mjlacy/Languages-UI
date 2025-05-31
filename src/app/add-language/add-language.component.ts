@@ -73,7 +73,7 @@ export class AddLanguageComponent implements OnInit, OnDestroy {
       name: (this.form.get("name") as FormControl<string>).value,
       creators: (this.form.get("creators") as FormArray<FormControl<string>>).value,
       extensions: (this.form.get("extensions") as FormArray<FormControl<string>>).value,
-      firstAppeared: (this.form.get("firstAppeared") as FormControl<Date>).value || null,
+      firstAppeared: (this.form.get("firstAppeared") as FormControl<Date>).value,
       year: (this.form.get("year") as FormControl<number>).value,
       wiki: (this.form.get("wiki") as FormControl<string>).value,
     };
