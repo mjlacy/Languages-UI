@@ -4,7 +4,7 @@
             <mat-form-field appearance="outline" hideRequiredMarker="true">
                 <mat-label>Name</mat-label>
                 <input matInput id="name" type="text" formControlName="name" [errorStateMatcher]="matcher">
-                @if (form.get('name')?.hasError('required')) {
+                @if (form.get("name")?.hasError("required")) {
                     <mat-error>Name is required</mat-error>
                 }
             </mat-form-field>
@@ -19,7 +19,7 @@
                         @if (!first) {
                             <mat-icon matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeCreator(i)"> </mat-icon>
                         }
-                        @if (creator.hasError('required')) {
+                        @if (creator.hasError("required")) {
                             <mat-error>Creator is required</mat-error>
                         }
                     </mat-form-field>
@@ -28,7 +28,7 @@
                     }
                 </div>
             }
-            
+
         </div>
 
         <div formArrayName="extensions">
@@ -40,9 +40,9 @@
                     @if (!first) {
                         <mat-icon matSuffix aria-hidden="false" aria-label="Close icon" fontIcon="close" (click)="removeExtension(i)"> </mat-icon>
                     }
-                    @if (extension.hasError('required')) {
+                    @if (extension.hasError("required")) {
                         <mat-error>Extension is required</mat-error>
-                    } @else if (extension.hasError('pattern')) {
+                    } @else if (extension.hasError("pattern")) {
                         <mat-error>Extension must start with a dot and contain no spaces or special characters</mat-error>
                     }
                 </mat-form-field>
@@ -61,9 +61,9 @@
                 <input matInput id="firstAppeared" formControlName="firstAppeared" [min]="startOf1900" [max]="currentDate" [matDatepicker]="picker" [errorStateMatcher]="matcher">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                @if (form.get('firstAppeared')?.hasError('matDatepickerMax')) {
+                @if (form.get("firstAppeared")?.hasError("matDatepickerMax")) {
                     <mat-error>First Appeared cannot be in the future</mat-error>
-                } @else if (form.get('firstAppeared')?.hasError('matDatepickerMin')) {
+                } @else if (form.get("firstAppeared")?.hasError("matDatepickerMin")) {
                     <mat-error>First Appeared must be at least in the year 1900</mat-error>
                 }
             </mat-form-field>
@@ -73,25 +73,25 @@
             <mat-form-field appearance="outline" hideRequiredMarker="true">
                 <mat-label>Year</mat-label>
                 <input matInput type="number" appDigitOnly pattern="\d+" [min]="1900" [max]=currentYear id="year" formControlName="year" [errorStateMatcher]="matcher">
-                @if (form.get('year')?.hasError('required')) {
+                @if (form.get("year")?.hasError("required")) {
                     <mat-error>Year is required</mat-error>
-                } @else if (form.get('year')?.hasError('max')) {
+                } @else if (form.get("year")?.hasError("max")) {
                     <mat-error>Year must not exceed current year</mat-error>
-                } @else if (form.get('year')?.hasError('min')) {
+                } @else if (form.get("year")?.hasError("min")) {
                     <mat-error>Year must be at least 1900</mat-error>
-                } @else if (form.get('year')?.hasError('pattern')) {
+                } @else if (form.get("year")?.hasError("pattern")) {
                     <mat-error>Year must not contain a decimal point</mat-error>
                 }
             </mat-form-field>
         </div>
-        
+
         <div [style.margin-bottom]="!!form.get('wiki')?.errors && form.get('wiki')?.touched ? '15px' : ''">
             <mat-form-field appearance="outline" hideRequiredMarker="true">
                 <mat-label>Wiki</mat-label>
                 <input matInput id="wiki" type="url" formControlName="wiki" [errorStateMatcher]="matcher">
-                @if (form.get('wiki')?.hasError('required')) {
+                @if (form.get("wiki")?.hasError("required")) {
                     <mat-error>Wiki is required</mat-error>
-                } @else if (form.get('wiki')?.hasError('pattern')) {
+                } @else if (form.get("wiki")?.hasError("pattern")) {
                     <mat-error>Wiki must be a url</mat-error>
                 }
             </mat-form-field>
@@ -101,4 +101,3 @@
         <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
     </form>
 </div>
-  

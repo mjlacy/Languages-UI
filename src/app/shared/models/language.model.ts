@@ -24,5 +24,5 @@ export interface LanguageForm {
 }
 
 export interface DeleteDialogData {
-  language: Language;
+  languageName: string;
 }

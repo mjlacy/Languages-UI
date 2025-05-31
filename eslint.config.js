@@ -45,7 +45,12 @@ module.exports = tseslint.config(
         }
       ],
       "no-extra-boolean-cast": "off",
-      "no-useless-escape": "off"
+      "no-useless-escape": "off",
+      "quotes": [
+        "error",
+        "double",
+      ],
+      "semi": "error"
     },
   },
   {

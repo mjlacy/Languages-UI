@@ -1,30 +1,30 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from "@angular/core";
 
 @Directive({
-    selector: '[appDigitOnly]',
+    selector: "[appDigitOnly]",
     standalone: false
 })
 export class DigitOnlyDirective implements OnChanges {
   @Input() decimal: boolean = false;
-  @Input() decimalSeparator: string = '.';
+  @Input() decimalSeparator: string = ".";
   @Input() min: number = -Infinity;
   @Input() max: number = Infinity;
-  @Input() pattern: string | RegExp = '';
+  @Input() pattern: string | RegExp = "";
   inputElement: HTMLInputElement;
   private hasDecimalPoint: boolean = false;
   private navigationKeys: string[] = [
-    'Backspace',
-    'Delete',
-    'Tab',
-    'Escape',
-    'Enter',
-    'Home',
-    'End',
-    'ArrowLeft',
-    'ArrowRight',
-    'Clear',
-    'Copy',
-    'Paste',
+    "Backspace",
+    "Delete",
+    "Tab",
+    "Escape",
+    "Enter",
+    "Home",
+    "End",
+    "ArrowLeft",
+    "ArrowRight",
+    "Clear",
+    "Copy",
+    "Paste",
   ];
   private regex: RegExp | null = null;
 
@@ -33,33 +33,33 @@ export class DigitOnlyDirective implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pattern']) {
+    if (changes["pattern"]) {
       this.regex = this.pattern ? RegExp(this.pattern) : null;
     }
 
-    if (changes['min']) {
+    if (changes["min"]) {
       const maybeMin: number = Number(this.min);
       this.min = isNaN(maybeMin) ? -Infinity : maybeMin;
     }
 
-    if (changes['max']) {
+    if (changes["max"]) {
       const maybeMax: number = Number(this.max);
       this.max = isNaN(maybeMax) ? Infinity : maybeMax;
     }
   }
 
-  @HostListener('keydown', ['$event'])
+  @HostListener("keydown", ["$event"])
   onKeyDown(e: KeyboardEvent): void {
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
-      (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
-      (e.key === 'c' && e.ctrlKey === true) || // Allow: Ctrl+C
-      (e.key === 'v' && e.ctrlKey === true) || // Allow: Ctrl+V
-      (e.key === 'x' && e.ctrlKey === true) || // Allow: Ctrl+X
-      (e.key === 'a' && e.metaKey === true) || // Allow: Cmd+A (Mac)
-      (e.key === 'c' && e.metaKey === true) || // Allow: Cmd+C (Mac)
-      (e.key === 'v' && e.metaKey === true) || // Allow: Cmd+V (Mac)
-      (e.key === 'x' && e.metaKey === true) || // Allow: Cmd+X (Mac)
+      (e.key === "a" && e.ctrlKey === true) || // Allow: Ctrl+A
+      (e.key === "c" && e.ctrlKey === true) || // Allow: Ctrl+C
+      (e.key === "v" && e.ctrlKey === true) || // Allow: Ctrl+V
+      (e.key === "x" && e.ctrlKey === true) || // Allow: Ctrl+X
+      (e.key === "a" && e.metaKey === true) || // Allow: Cmd+A (Mac)
+      (e.key === "c" && e.metaKey === true) || // Allow: Cmd+C (Mac)
+      (e.key === "v" && e.metaKey === true) || // Allow: Cmd+V (Mac)
+      (e.key === "x" && e.metaKey === true) || // Allow: Cmd+X (Mac)
       (this.decimal && e.key === this.decimalSeparator && !this.hasDecimalPoint) // Allow: only one decimal point
     ) {
       // let it happen, don't do anything
@@ -67,7 +67,7 @@ export class DigitOnlyDirective implements OnChanges {
     }
 
     // Ensure that it is a number and stop the keypress
-    if (e.key === ' ' || isNaN(Number(e.key))) {
+    if (e.key === " " || isNaN(Number(e.key))) {
       e.preventDefault();
     }
 
@@ -85,21 +85,21 @@ export class DigitOnlyDirective implements OnChanges {
     }
   }
 
-  @HostListener('keyup', ['$event'])
+  @HostListener("keyup", ["$event"])
   onKeyUp(_: KeyboardEvent): void {
     this.updateDecimalPoint();
   }
 
-  @HostListener('paste', ['$event'])
+  @HostListener("paste", ["$event"])
   onPaste(event: ClipboardEvent): void {
-    const pastedInput: string = (event.clipboardData as DataTransfer).getData('text/plain');
+    const pastedInput: string = (event.clipboardData as DataTransfer).getData("text/plain");
     this.pasteData(pastedInput);
     event.preventDefault();
   }
 
-  @HostListener('drop', ['$event'])
+  @HostListener("drop", ["$event"])
   onDrop(event: DragEvent): void {
-    const textData: string = (event.dataTransfer as DataTransfer).getData('text');
+    const textData: string = (event.dataTransfer as DataTransfer).getData("text");
     this.inputElement.focus();
     this.pasteData(textData);
     event.preventDefault();
@@ -114,28 +114,28 @@ export class DigitOnlyDirective implements OnChanges {
 
   private pasteData(pastedContent: string): void {
     const sanitizedContent: string = this.sanitizeInput(pastedContent);
-    const pasted: boolean = document.execCommand('insertText', false, sanitizedContent);
+    const pasted: boolean = document.execCommand("insertText", false, sanitizedContent);
     if (!pasted) {
       const {selectionStart: start, selectionEnd: end} = this.inputElement;
-      this.inputElement.setRangeText(sanitizedContent, start as number, end as number, 'end');
+      this.inputElement.setRangeText(sanitizedContent, start as number, end as number, "end");
     }
     this.updateDecimalPoint();
   }
 
   private sanitizeInput(input: string): string {
-    let result: string = '';
+    let result: string = "";
     if (this.decimal && this.isValidDecimal(input)) {
-      const regex: RegExp = new RegExp(`[^0-9${this.decimalSeparator}]`, 'g');
-      result = input.replace(regex, '');
+      const regex: RegExp = new RegExp(`[^0-9${this.decimalSeparator}]`, "g");
+      result = input.replace(regex, "");
     } else {
-      result = input.replace(/[^0-9]/g, '');
+      result = input.replace(/[^0-9]/g, "");
     }
 
     const maxLength: number = this.inputElement.maxLength;
     if (maxLength > 0) {
       // the input element has maxLength limit
       const allowedLength: number = maxLength - this.inputElement.value.length;
-      result = allowedLength > 0 ? result.substring(0, allowedLength) : '';
+      result = allowedLength > 0 ? result.substring(0, allowedLength) : "";
     }
     return result;
   }
