@@ -14,7 +14,7 @@
 // }
 //
 // NOTE: You can use it like so:
-// Cypress.Commands.add('customCommand', customCommand);
+// Cypress.Commands.add("customCommand", customCommand);
 //
 // ***********************************************
 // This example commands.js shows you how to
@@ -32,12 +32,31 @@
 //
 //
 // -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
+// Cypress.Commands.add("drag", { prevSubject: "element"}, (subject, options) => { ... })
 //
 //
 // -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
+// Cypress.Commands.add("dismiss", { prevSubject: "optional"}, (subject, options) => { ... })
 //
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    setInterceptors(languages): Chainable<Subject>;
+  }
+}
+
+Cypress.Commands.add("setInterceptors", (languages) => {
+  cy.intercept({
+    hostname: "localhost",
+    method: "GET",
+    url: "/api/"
+  }, (req) => req.reply({
+    body: languages,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })).as("getLanguages");
+});

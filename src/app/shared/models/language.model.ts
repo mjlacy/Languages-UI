@@ -9,7 +9,7 @@ export interface Language {
   name: string;
   creators: string[];
   extensions: string[];
-  firstAppeared: Date;
+  firstAppeared: Date | null;
   year: number;
   wiki: string;
 }
