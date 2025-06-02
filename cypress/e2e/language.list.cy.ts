@@ -1,4 +1,4 @@
-describe("My First Test", () => {
+describe("Language List Page", () => {
   beforeEach(function () {
     cy.fixture("mockData.json").as("languages").then(() => {
       cy.setInterceptors(this["languages"]).then(() => {
@@ -222,8 +222,31 @@ describe("My First Test", () => {
 
     cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
       const wikiLink: string = this["languages"].languages[0].wiki;
-      cy.wrap(firstChild.get(0).children.item(5)?.children.item(0)).click();
+      firstChild.get(0).children.item(5)?.children.item(0).click();
       cy.origin("https://en.wikipedia.org", { args: { wikiLink } }, ({ wikiLink }) => cy.url().should("eq", wikiLink));
+    });
+  });
+
+  it("should take the user to the add page when 'Add Language' is clicked", function () {
+    cy.wait("@getLanguages");
+    cy.get("app-language-list > :nth-child(1) > :nth-child(1) > :nth-child(1)").click();
+    cy.url().should("eq", "http://localhost:4200/add");
+  });
+
+  it("should take the user to the edit page when 'Edit' is clicked", function () {
+    cy.wait("@getLanguages");
+    cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
+      firstChild.get(0).children.item(6)?.children.item(0).click();
+      cy.url().should("eq", "http://localhost:4200/edit/1");
+    });
+  });
+
+  it("should open the delete modal when 'Delete' is clicked", function () {
+    cy.wait("@getLanguages");
+    const name: string = this["languages"].languages[0].name;
+    cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
+      firstChild.get(0).children.item(7)?.children.item(0).click();
+      cy.get("mat-dialog-container").should("be.visible");
     });
   });
 });
