@@ -7,7 +7,7 @@ describe("Language List Page", () => {
     });
   });
 
-  it("should have headings", function () {
+  it("should have headings", () => {
     const headings: string[] = ["Name", "Creators", "Extensions", "First Appeared", "Year", "Wiki", "Edit", "Delete"];
 
     cy.get("table thead tr").children().each((heading: JQuery<HTMLElement>, index: number) => {
@@ -15,7 +15,7 @@ describe("Language List Page", () => {
     });
   });
 
-  it("should display 5 languages initially", function () {
+  it("should display 5 languages initially", () => {
     cy.wait("@getLanguages");
     cy.get("table tbody").children().then((children: JQuery<HTMLElement>) => {
       cy.wrap(children.length).should("eq", 5);
@@ -171,7 +171,7 @@ describe("Language List Page", () => {
     });
   });
 
-  it("should display 10 languages on page size change", function () {
+  it("should display 10 languages on page size change", () => {
     cy.wait("@getLanguages");
 
     cy.get("div .mat-mdc-paginator-page-size-select").click();
@@ -182,7 +182,7 @@ describe("Language List Page", () => {
     });
   });
 
-  it("should display 20 languages on page size change", function () {
+  it("should display 20 languages on page size change", () => {
     cy.wait("@getLanguages");
 
     cy.get("div .mat-mdc-paginator-page-size-select").click();
@@ -204,7 +204,7 @@ describe("Language List Page", () => {
     });
   });
 
-  it("should display 5 languages on page size change", function () {
+  it("should display 5 languages on page size change", () => {
     cy.wait("@getLanguages");
 
     cy.get("div .mat-mdc-paginator-page-size-select").click();
@@ -222,30 +222,29 @@ describe("Language List Page", () => {
 
     cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
       const wikiLink: string = this["languages"].languages[0].wiki;
-      firstChild.get(0).children.item(5)?.children.item(0).click();
+      firstChild.get(0).children.item(5)?.children.item(0)?.click();
       cy.origin("https://en.wikipedia.org", { args: { wikiLink } }, ({ wikiLink }) => cy.url().should("eq", wikiLink));
     });
   });
 
-  it("should take the user to the add page when 'Add Language' is clicked", function () {
+  it("should take the user to the add page when 'Add Language' is clicked", () => {
     cy.wait("@getLanguages");
     cy.get("app-language-list > :nth-child(1) > :nth-child(1) > :nth-child(1)").click();
     cy.url().should("eq", "http://localhost:4200/add");
   });
 
-  it("should take the user to the edit page when 'Edit' is clicked", function () {
+  it("should take the user to the edit page when 'Edit' is clicked", () => {
     cy.wait("@getLanguages");
     cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
-      firstChild.get(0).children.item(6)?.children.item(0).click();
+      firstChild.get(0).children.item(6)?.children.item(0)?.click();
       cy.url().should("eq", "http://localhost:4200/edit/1");
     });
   });
 
-  it("should open the delete modal when 'Delete' is clicked", function () {
+  it("should open the delete modal when 'Delete' is clicked", () => {
     cy.wait("@getLanguages");
-    const name: string = this["languages"].languages[0].name;
     cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
-      firstChild.get(0).children.item(7)?.children.item(0).click();
+      firstChild.get(0).children.item(7)?.children.item(0)?.click();
       cy.get("mat-dialog-container").should("be.visible");
     });
   });

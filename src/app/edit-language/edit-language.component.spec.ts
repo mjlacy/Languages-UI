@@ -10,7 +10,7 @@ import {globals} from "@environments/globals";
 describe("EditLanguageComponent", () => {
   let component: EditLanguageComponent;
   let fixture: ComponentFixture<EditLanguageComponent>;
-  let formGroup: FormGroup<LanguageForm>
+  let formGroup: FormGroup<LanguageForm>;
   let router: Router;
   const formBuilder: FormBuilder = new FormBuilder();
   const mockLanguageService = jasmine.createSpyObj("LanguageService", ["getLanguage", "upsertLanguage"]);
@@ -133,7 +133,7 @@ describe("EditLanguageComponent", () => {
 
     beforeEach(() => {
       groupSpy = spyOn(component.formBuilder, "group").and.callThrough();
-      lang = { creators: ["creator"], extensions: ["extension"]} as Language
+      lang = { creators: ["creator"], extensions: ["extension"]} as Language;
       component.language = lang;
     });
 
