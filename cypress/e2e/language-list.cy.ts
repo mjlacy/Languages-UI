@@ -236,17 +236,13 @@ describe("Language List Page", () => {
 
   it("should take the user to the edit page when 'Edit' is clicked", () => {
     cy.wait("@getLanguages");
-    cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
-      firstChild.get(0).children.item(6)?.children.item(0)?.click();
-      cy.url().should("eq", "http://localhost:4200/edit/1");
-    });
+    cy.get("[data-mat-icon-name='edit']").first().click();
+    cy.url().should("eq", "http://localhost:4200/edit/1");
   });
 
   it("should open the delete modal when 'Delete' is clicked", () => {
     cy.wait("@getLanguages");
-    cy.get("table tbody").children().first().then((firstChild: JQuery<HTMLElement>) => {
-      firstChild.get(0).children.item(7)?.children.item(0)?.click();
-      cy.get("mat-dialog-container").should("be.visible");
-    });
+    cy.get("[data-mat-icon-name='delete']").first().click();
+    cy.get("mat-dialog-container").should("be.visible", true);
   });
 });

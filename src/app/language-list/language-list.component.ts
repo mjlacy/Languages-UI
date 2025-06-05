@@ -55,6 +55,7 @@ export class LanguageListComponent implements OnInit, AfterViewInit, OnDestroy {
       data: {
         languageName: language.name
       },
+      disableClose: true
     });
 
     dialogRef

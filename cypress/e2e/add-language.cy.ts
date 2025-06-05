@@ -211,7 +211,7 @@ describe("Add Language Page", () => {
 
   it("should not set mat-error when firstAppeared input is clicked since firstAppeared is not a required field", () => {
     cy.get("mat-datepicker-toggle").click();
-    cy.get("#extension-0").click();
+    cy.get("#extension-0").click({ force: true });
     cy.get("mat-error").should("not.exist", true);
   });
 

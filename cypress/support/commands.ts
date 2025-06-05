@@ -69,5 +69,16 @@ Cypress.Commands.add("setInterceptors", (languages) => {
     headers: {
       "Content-Type": "application/json"
     }
-  })).as("postLanguages");
+  })).as("postLanguage");
+
+  cy.intercept({
+    hostname: "localhost",
+    method: "DELETE",
+    url: "/api/*"
+  }, (req) => req.reply({
+    body: null,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })).as("deleteLanguage");
 });

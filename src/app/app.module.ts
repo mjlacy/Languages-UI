@@ -19,7 +19,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { provideNativeDateAdapter } from "@angular/material/core";
-import { NgVarDirective } from "./shared/directives/ngVar/ngVar-directive";
+// import { NgVarDirective } from "./shared/directives/ngVar/ngVar-directive";
 import { DigitOnlyDirective } from "./shared/directives/digit-only/digit-only-directive";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DeleteLanguageComponent } from "./delete-language/delete-language.component";
@@ -33,7 +33,7 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
     LanguageListComponent,
     AddLanguageComponent,
     DigitOnlyDirective,
-    NgVarDirective,
+    // NgVarDirective,
     EditLanguageComponent,
     DeleteLanguageComponent
   ],
