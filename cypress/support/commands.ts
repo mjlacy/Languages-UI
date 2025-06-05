@@ -59,4 +59,15 @@ Cypress.Commands.add("setInterceptors", (languages) => {
       "Content-Type": "application/json"
     }
   })).as("getLanguages");
+
+  cy.intercept({
+    hostname: "localhost",
+    method: "POST",
+    url: "/api/"
+  }, (req) => req.reply({
+    body: null,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })).as("postLanguages");
 });

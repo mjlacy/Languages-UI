@@ -8,6 +8,7 @@ describe("Language List Page", () => {
   });
 
   it("should have headings", () => {
+    cy.wait("@getLanguages");
     const headings: string[] = ["Name", "Creators", "Extensions", "First Appeared", "Year", "Wiki", "Edit", "Delete"];
 
     cy.get("table thead tr").children().each((heading: JQuery<HTMLElement>, index: number) => {
