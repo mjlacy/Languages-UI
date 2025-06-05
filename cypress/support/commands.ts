@@ -62,6 +62,17 @@ Cypress.Commands.add("setInterceptors", (languages) => {
 
   cy.intercept({
     hostname: "localhost",
+    method: "GET",
+    url: "/api/*"
+  }, (req) => req.reply({
+    body: languages.languages[0],
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })).as("getLanguage");
+
+  cy.intercept({
+    hostname: "localhost",
     method: "POST",
     url: "/api/"
   }, (req) => req.reply({
@@ -70,6 +81,17 @@ Cypress.Commands.add("setInterceptors", (languages) => {
       "Content-Type": "application/json"
     }
   })).as("postLanguage");
+
+  cy.intercept({
+    hostname: "localhost",
+    method: "PUT",
+    url: "/api/*"
+  }, (req) => req.reply({
+    body: null,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })).as("putLanguage");
 
   cy.intercept({
     hostname: "localhost",
