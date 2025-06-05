@@ -9,7 +9,7 @@ describe("DeleteLanguageComponent", () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatDialogModule,
+        MatDialogModule
       ],
       declarations: [DeleteLanguageComponent],
       providers : [

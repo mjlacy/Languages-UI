@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Language, Languages } from "../shared/models/language.model";
-import { LanguageService } from "../services/language.service";
+import { Language, Languages } from "@models/language.model";
+import { LanguageService } from "@services/language.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";

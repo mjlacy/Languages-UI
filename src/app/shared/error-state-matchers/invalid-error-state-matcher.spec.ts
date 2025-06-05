@@ -11,14 +11,14 @@ describe("InvalidErrorStateMatcher", () => {
 
     it("should return false if given control is valid", () => {
       const ctrl: FormControl = new FormControl({
-        name: [],
+        name: []
       });
       expect(iesm.isErrorState(ctrl, new FormGroupDirective([], [], undefined))).toBeFalse();
     });
 
     it("should return false if given control is untouched", () => {
       const ctrl: FormControl = new FormControl({
-        name: [Validators.required],
+        name: [Validators.required]
       });
       ctrl.markAsUntouched();
       expect(iesm.isErrorState(ctrl, new FormGroupDirective([], [], undefined))).toBeFalse();

@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import { LanguageService } from "../services/language.service";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { LanguageService } from "@services/language.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Language, LanguageForm } from "../shared/models/language.model";
+import { Language, LanguageForm } from "@models/language.model";
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { globals } from "@environments/globals";
 import { InvalidErrorStateMatcher } from "../shared/error-state-matchers/invalid-error-state-matcher";
-import {Subject, takeUntil} from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: "app-add-language",
@@ -40,7 +40,7 @@ export class AddLanguageComponent implements OnInit, OnDestroy {
       extensions: this.formBuilder.array([this.formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.EXTENSION_REGEX)])]) as FormArray<FormControl<string>>,
       firstAppeared: this.formBuilder.control("") as unknown as FormControl<Date>,
       year: this.formBuilder.control("", Validators.required) as unknown as FormControl<number>,
-      wiki: this.formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>,
+      wiki: this.formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>
     });
   }
 
@@ -75,7 +75,7 @@ export class AddLanguageComponent implements OnInit, OnDestroy {
       extensions: (this.form.get("extensions") as FormArray<FormControl<string>>).value,
       firstAppeared: (this.form.get("firstAppeared") as FormControl<Date>).value,
       year: (this.form.get("year") as FormControl<number>).value,
-      wiki: (this.form.get("wiki") as FormControl<string>).value,
+      wiki: (this.form.get("wiki") as FormControl<string>).value
     };
   }
 

@@ -7,17 +7,19 @@ import { EditLanguageComponent } from "./edit-language/edit-language.component";
 const routes: Routes = [
   {
     path: "",
-    component: LanguageListComponent,
+    component: LanguageListComponent
   },
   {
     path: "add",
-    component: AddLanguageComponent,
+    component: AddLanguageComponent
   },
   {
     path: "edit/:_id",
-    component: EditLanguageComponent,
+    component: EditLanguageComponent
   },
-  { path: "**", component: LanguageListComponent }
+  { path: "**",
+    component: LanguageListComponent
+  }
 ];
 
 @NgModule({

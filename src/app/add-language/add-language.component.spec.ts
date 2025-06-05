@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { AddLanguageComponent } from "./add-language.component";
-import { LanguageService } from "../services/language.service";
+import { LanguageService } from "@services/language.service";
 import {
   FormArray,
   FormBuilder,
@@ -14,7 +14,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { globals } from "@environments/globals";
-import { Language, LanguageForm } from "../shared/models/language.model";
+import { Language, LanguageForm } from "@models/language.model";
 import { of, throwError } from "rxjs";
 import { Router, RouterModule } from "@angular/router";
 
@@ -55,7 +55,7 @@ describe("AddLanguageComponent", () => {
       extensions: formBuilder.array([formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.EXTENSION_REGEX)])]) as FormArray<FormControl<string>>,
       firstAppeared: formBuilder.control("") as unknown as FormControl<Date>,
       year: formBuilder.control("", Validators.required) as unknown as FormControl<number>,
-      wiki: formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>,
+      wiki: formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>
     });
 
     router = TestBed.inject(Router);

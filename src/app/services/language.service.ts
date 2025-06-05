@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
 import { first } from "rxjs/operators";
-import { Language, Languages } from "../shared/models/language.model";
+import { Language, Languages } from "@models/language.model";
 
 const httpOptions = {
   headers: new HttpHeaders({"Content-Type": "application/json"})

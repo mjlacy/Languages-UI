@@ -2,7 +2,7 @@ import { HttpTestingController, provideHttpClientTesting, TestRequest } from "@a
 import { TestBed } from "@angular/core/testing";
 import { LanguageService } from "./language.service";
 import { environment } from "@environments/environment";
-import { Language, Languages } from "../shared/models/language.model";
+import { Language, Languages } from "@models/language.model";
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 describe("LanguageService", () => {

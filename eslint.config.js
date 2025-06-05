@@ -44,6 +44,7 @@ module.exports = tseslint.config(
           "ignoreRestSiblings": true
         }
       ],
+      "comma-dangle": "error",
       "no-extra-boolean-cast": "off",
       "no-useless-escape": "off",
       "quotes": [

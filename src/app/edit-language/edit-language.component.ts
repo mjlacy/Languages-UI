@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Language, LanguageForm } from "../shared/models/language.model";
-import { LanguageService } from "../services/language.service";
+import { Language, LanguageForm } from "@models/language.model";
+import { LanguageService } from "@services/language.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { globals } from "@environments/globals";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -70,7 +70,7 @@ export class EditLanguageComponent implements OnInit, OnDestroy {
       extensions: this.formBuilder.array(extensions) as FormArray<FormControl<string>>,
       firstAppeared: this.formBuilder.control(this.language.firstAppeared) as unknown as FormControl<Date>,
       year: this.formBuilder.control(this.language.year, Validators.required) as unknown as FormControl<number>,
-      wiki: this.formBuilder.control(this.language.wiki, [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>,
+      wiki: this.formBuilder.control(this.language.wiki, [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>
     });
   }
 
@@ -106,7 +106,7 @@ export class EditLanguageComponent implements OnInit, OnDestroy {
       extensions: (this.form.get("extensions") as FormArray<FormControl<string>>).value,
       firstAppeared: (this.form.get("firstAppeared") as FormControl<Date>).value,
       year: (this.form.get("year") as FormControl<number>).value,
-      wiki: (this.form.get("wiki") as FormControl<string>).value,
+      wiki: (this.form.get("wiki") as FormControl<string>).value
     };
   }
 

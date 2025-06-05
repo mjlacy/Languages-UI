@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { EditLanguageComponent } from "./edit-language.component";
-import { LanguageService } from "../services/language.service";
-import {Router, RouterModule} from "@angular/router";
-import {of, throwError} from "rxjs";
-import {Language, LanguageForm} from "../shared/models/language.model";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {globals} from "@environments/globals";
+import { LanguageService } from "@services/language.service";
+import { Router, RouterModule } from "@angular/router";
+import { of, throwError } from "rxjs";
+import { Language, LanguageForm } from "@models/language.model";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { globals } from "@environments/globals";
 
 describe("EditLanguageComponent", () => {
   let component: EditLanguageComponent;
@@ -38,7 +38,7 @@ describe("EditLanguageComponent", () => {
       extensions: formBuilder.array([formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.EXTENSION_REGEX)])]) as FormArray<FormControl<string>>,
       firstAppeared: formBuilder.control("") as unknown as FormControl<Date>,
       year: formBuilder.control("", Validators.required) as unknown as FormControl<number>,
-      wiki: formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>,
+      wiki: formBuilder.control("", [Validators.required, Validators.pattern(globals.constants.URL_REGEX)]) as FormControl<string>
     });
 
     router = TestBed.inject(Router);
@@ -186,7 +186,7 @@ describe("EditLanguageComponent", () => {
       expect(component.form.get("name")?.value).toBe(lang.name);
       expect(component.form.get("creators")?.value).toEqual(lang.creators);
       expect(component.form.get("extensions")?.value).toEqual(lang.extensions);
-      expect(component.form.get("firstAppeared")?.value).toEqual(lang.firstAppeared);
+      expect(component.form.get("firstAppeared")?.value).toEqual(lang.firstAppeared as Date);
       expect(component.form.get("year")?.value).toBe(lang.year);
       expect(component.form.get("wiki")?.value).toBe(lang.wiki);
     });
@@ -253,11 +253,12 @@ describe("EditLanguageComponent", () => {
 
   describe("getLanguageFromForm()", () => {
     it("should return a Language", () => {
+      const currentDate: Date = new Date();
       component.form = formGroup;
       component.form.get("name")?.setValue("name");
       component.form.get("creators")?.setValue(["creator"]);
       component.form.get("extensions")?.setValue(["extension"]);
-      component.form.get("firstAppeared")?.setValue(new Date());
+      component.form.get("firstAppeared")?.setValue(currentDate);
       component.form.get("year")?.setValue(1900);
       component.form.get("wiki")?.setValue("wiki");
       component.language = { _id: "1" } as Language;
@@ -267,7 +268,7 @@ describe("EditLanguageComponent", () => {
         name: "name",
         creators: ["creator"],
         extensions: ["extension"],
-        firstAppeared: new Date(),
+        firstAppeared: currentDate,
         year: 1900,
         wiki: "wiki"
       };

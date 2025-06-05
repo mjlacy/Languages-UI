@@ -24,7 +24,7 @@ export class DigitOnlyDirective implements OnChanges {
     "ArrowRight",
     "Clear",
     "Copy",
-    "Paste",
+    "Paste"
   ];
   private regex: RegExp | null = null;
 
@@ -123,7 +123,7 @@ export class DigitOnlyDirective implements OnChanges {
   }
 
   private sanitizeInput(input: string): string {
-    let result: string = "";
+    let result: string;
     if (this.decimal && this.isValidDecimal(input)) {
       const regex: RegExp = new RegExp(`[^0-9${this.decimalSeparator}]`, "g");
       result = input.replace(regex, "");

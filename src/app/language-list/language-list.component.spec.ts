@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { LanguageListComponent } from "./language-list.component";
-import { LanguageService } from "../services/language.service";
+import { LanguageService } from "@services/language.service";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
-import { Language, Languages } from "../shared/models/language.model";
+import { Language, Languages } from "@models/language.model";
 import { of, throwError } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteLanguageComponent } from "../delete-language/delete-language.component";
@@ -121,6 +121,7 @@ describe("LanguageListComponent", () => {
         data: {
           languageName: lang.name
         },
+        disableClose: true
       });
     });
 

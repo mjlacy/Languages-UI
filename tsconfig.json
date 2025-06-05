@@ -23,7 +23,10 @@
       "dom"
     ],
     "paths": {
-      "@environments/*": ["./src/environments/*"]
+      "@environments/*": ["./src/environments/*"],
+      "@models/*": ["./src/app/shared/models/*"],
+      "@pipes/*": ["./src/app/shared/pipes/*"],
+      "@services/*": ["./src/app/services/*"]
     }
   },
   "angularCompilerOptions": {
