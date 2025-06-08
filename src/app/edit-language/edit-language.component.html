@@ -75,13 +75,13 @@
         <div [style.margin-bottom]="!!form.get('year')?.errors && form.get('year')?.touched ? form.get('year')?.hasError('min') || form.get('year')?.hasError('required') ? '15px' : '30px' : ''">
             <mat-form-field appearance="outline" hideRequiredMarker="true">
                 <mat-label>Year</mat-label>
-                <input matInput type="number" appDigitOnly pattern="\d+" [min]="0" [max]=currentYear id="year" formControlName="year" [errorStateMatcher]="matcher">
+                <input matInput type="number" appDigitOnly pattern="\d+" [min]="1900" [max]=currentYear id="year" formControlName="year" [errorStateMatcher]="matcher">
                 @if (form.get("year")?.hasError("required")) {
                     <mat-error>Year is required</mat-error>
                 } @else if (form.get("year")?.hasError("max")) {
                     <mat-error>Year must not exceed current year</mat-error>
                 } @else if (form.get("year")?.hasError("min")) {
-                    <mat-error>Year must be at least 0</mat-error>
+                    <mat-error>Year must be at least 1900</mat-error>
                 } @else if (form.get("year")?.hasError("pattern")) {
                     <mat-error>Year must not contain a decimal point</mat-error>
                 }
