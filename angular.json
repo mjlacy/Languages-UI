@@ -163,7 +163,8 @@
           "options": {
             "devServerTarget": "Languages-Ui:serve",
             "watch": true,
-            "headless": false
+            "headless": false,
+            "browser": "chrome"
           },
           "configurations": {
             "production": {
