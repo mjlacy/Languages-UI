@@ -117,6 +117,7 @@ describe("LanguageListComponent", () => {
 
     it("should call dialog.open()", () => {
       component.openDialog(lang);
+      // @ts-expect-error // dialog is private
       expect(component.dialog.open).toHaveBeenCalledWith(DeleteLanguageComponent, {
         data: {
           languageName: lang.name

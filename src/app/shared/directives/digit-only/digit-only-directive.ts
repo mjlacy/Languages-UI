@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Directive, ElementRef, HostListener, inject, Input, OnChanges, SimpleChanges } from "@angular/core";
 
 @Directive({
     selector: "[appDigitOnly]",
@@ -28,8 +28,10 @@ export class DigitOnlyDirective implements OnChanges {
   ];
   private regex: RegExp | null = null;
 
-  constructor(public el: ElementRef) {
-    this.inputElement = el.nativeElement;
+  private el: ElementRef = inject(ElementRef);
+
+  constructor() {
+    this.inputElement = this.el.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -102,6 +102,7 @@ describe("AddLanguageComponent", () => {
     let groupSpy: jasmine.Spy;
 
     beforeEach(() => {
+      // @ts-expect-error // formBuilder is private
       groupSpy = spyOn(component.formBuilder, "group").and.returnValue(formGroup);
     });
 

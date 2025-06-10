@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { DeleteDialogData } from "@models/language.model";
 
@@ -9,8 +9,6 @@ import { DeleteDialogData } from "@models/language.model";
     standalone: false
 })
 export class DeleteLanguageComponent {
-  constructor(
-    public _: MatDialogRef<DeleteLanguageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DeleteDialogData
-  ) {}
+  private _: MatDialogRef<DeleteLanguageComponent> = inject(MatDialogRef<DeleteLanguageComponent>);
+  protected data: DeleteDialogData = inject(MAT_DIALOG_DATA);
 }

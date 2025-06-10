@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Language, Languages } from "@models/language.model";
 import { LanguageService } from "@services/language.service";
@@ -20,7 +20,8 @@ export class LanguageListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
   destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private languageService: LanguageService, public dialog: MatDialog) {}
+  private languageService: LanguageService = inject(LanguageService);
+  private dialog: MatDialog = inject(MatDialog);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 

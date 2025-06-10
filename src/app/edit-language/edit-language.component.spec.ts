@@ -132,6 +132,7 @@ describe("EditLanguageComponent", () => {
     let lang: Language;
 
     beforeEach(() => {
+      // @ts-expect-error // formBuilder is private
       groupSpy = spyOn(component.formBuilder, "group").and.callThrough();
       lang = { creators: ["creator"], extensions: ["extension"]} as Language;
       component.language = lang;

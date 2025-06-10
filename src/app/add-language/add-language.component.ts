@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, inject, OnDestroy, OnInit } from "@angular/core";
 import { LanguageService } from "@services/language.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -22,7 +22,9 @@ export class AddLanguageComponent implements OnInit, OnDestroy {
   matcher: InvalidErrorStateMatcher = new InvalidErrorStateMatcher();
   startOf1900: Date = new Date(0, 0, 1, 0, 0, 0);
 
-  constructor(public formBuilder: FormBuilder, private languageService: LanguageService, private router: Router) {}
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private languageService: LanguageService = inject(LanguageService);
+  private router: Router = inject(Router);
 
   ngOnInit(): void {
     this.buildForm();

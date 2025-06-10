@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
 import { first } from "rxjs/operators";
@@ -11,9 +11,9 @@ const httpOptions = {
 
 @Injectable()
 export class LanguageService {
-  public readonly LANGUAGE_API_URL = environment.apiUrl;
+  public readonly LANGUAGE_API_URL: string = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {}
+  private httpClient: HttpClient = inject(HttpClient);
 
   getLanguages(lang?: Language): Observable<Languages> {
     let queryString: string = "?" + (!!lang?.name ? `name=${lang.name}&` : "") + (!!lang?.creators?.length ? `creators=${lang?.creators.toString()}&` : "") +
