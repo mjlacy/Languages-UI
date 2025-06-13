@@ -31,7 +31,7 @@ describe("Add Language Page", () => {
 
   it("should have enabled '+ Add another creator' button next to the last creator input", () => {
     cy.get("[formarrayname='creators']").children().first().then((element: JQuery<HTMLElement>) => {
-      cy.wrap(element.children("button").get(0)).should("be.enabled", true);
+      cy.wrap(element.children("button").get(0)).should("be.enabled");
     });
   });
 
@@ -43,7 +43,7 @@ describe("Add Language Page", () => {
 
   it("should have enabled '+ Add another extension' button next to the last extension input", () => {
     cy.get("[formarrayname='extensions']").children().first().then((element: JQuery<HTMLElement>) => {
-      cy.wrap(element.children("button").get(0)).should("be.enabled", true);
+      cy.wrap(element.children("button").get(0)).should("be.enabled");
     });
   });
 
@@ -55,7 +55,7 @@ describe("Add Language Page", () => {
 
   it("should have enabled cancel button", () => {
     cy.get("form").children().last().prev().then((element: JQuery<HTMLElement>)=> {
-      cy.wrap(element.get(0)).should("be.enabled", true);
+      cy.wrap(element.get(0)).should("be.enabled");
     });
   });
 
@@ -67,7 +67,7 @@ describe("Add Language Page", () => {
 
   it("should have disabled submit button", () => {
     cy.get("form").children().last().then((element: JQuery<HTMLElement>)=> {
-      cy.wrap(element.get(0)).should("be.disabled", true);
+      cy.wrap(element.get(0)).should("be.disabled");
     });
   });
 
@@ -87,8 +87,8 @@ describe("Add Language Page", () => {
   it("should remove mat-error when name input is given a value", () => {
     cy.get("#name").click();
     cy.get("#firstAppeared").click({ force: true });
-    cy.get("#name").type("Name", {force: true});
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("#name").type("Name", { force: true });
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should add 'float-above' class to 'Creator' label on click", () => {
@@ -107,8 +107,8 @@ describe("Add Language Page", () => {
   it("should remove mat-error when creator input is given a value", () => {
     cy.get("#creator-0").click();
     cy.get("#firstAppeared").click({ force: true });
-    cy.get("#creator-0").type("Creator", {force: true});
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("#creator-0").type("Creator", { force: true });
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should add another 'Creators' input when '+ Add another creator' button is clicked", () => {
@@ -152,8 +152,8 @@ describe("Add Language Page", () => {
   it("should remove mat-error when extension input is given a valid value", () => {
     cy.get("#extension-0").click();
     cy.get("#firstAppeared").click({ force: true });
-    cy.get("#extension-0").type(".ts", {force: true});
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("#extension-0").type(".ts", { force: true });
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should add another 'Extensions' input when '+ Add another extension' button is clicked", () => {
@@ -183,7 +183,7 @@ describe("Add Language Page", () => {
 
   it("should open mat-datepicker-content when mat-datepicker-toggle is clicked", () => {
     cy.get("mat-datepicker-toggle").click();
-    cy.get("mat-datepicker-content").should("exist", true);
+    cy.get("mat-datepicker-content").should("exist");
   });
 
   it("should apply mat-calendar-body-active class to current date", () => {
@@ -212,7 +212,7 @@ describe("Add Language Page", () => {
   it("should not set mat-error when firstAppeared input is clicked since firstAppeared is not a required field", () => {
     cy.get("mat-datepicker-toggle").click();
     cy.get("#extension-0").click({ force: true });
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should apply min attribute of 1900-01-01 to firstAppeared input", () => {
@@ -250,8 +250,8 @@ describe("Add Language Page", () => {
   it("should remove mat-error when year input is given a valid value", () => {
     cy.get("#year").click();
     cy.get("#firstAppeared").click({ force: true });
-    cy.get("#year").type("2000", {force: true});
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("#year").type("2000", { force: true });
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should apply min attribute of 1900 to year input", () => {
@@ -285,8 +285,8 @@ describe("Add Language Page", () => {
   it("should remove mat-error when wiki input is given a valid value", () => {
     cy.get("#wiki").click();
     cy.get("#firstAppeared").click({ force: true });
-    cy.get("#wiki").type("https://www.wikipedia.org", {force: true});
-    cy.get("mat-error").should("not.exist", true);
+    cy.get("#wiki").type("https://www.wikipedia.org", { force: true });
+    cy.get("mat-error").should("not.exist");
   });
 
   it("should navigate to home page on clicking cancel button", function () {
@@ -299,24 +299,24 @@ describe("Add Language Page", () => {
   });
 
   it("should enable submit button when all required inputs are given a valid value", () => {
-    cy.get("#name").type("Name", {force: true});
-    cy.get("#creator-0").type("Creator", {force: true});
-    cy.get("#extension-0").type(".ts", {force: true});
-    cy.get("#year").type("2000", {force: true});
-    cy.get("#wiki").type("https://www.wikipedia.org", {force: true});
+    cy.get("#name").type("Name", { force: true });
+    cy.get("#creator-0").type("Creator", { force: true });
+    cy.get("#extension-0").type(".ts", { force: true });
+    cy.get("#year").type("2000", { force: true });
+    cy.get("#wiki").type("https://www.wikipedia.org", { force: true });
     cy.get("form").children().last().then((element: JQuery<HTMLElement>)=> {
-      cy.wrap(element.get(0)).should("be.enabled", true);
+      cy.wrap(element.get(0)).should("be.enabled");
     });
   });
 
   it("should navigate to home page on clicking enabled submit button", function () {
     cy.fixture("mockData.json").as("languages").then(() => {
       cy.setInterceptors(this["languages"]).then(() => {
-        cy.get("#name").type("Name", {force: true});
-        cy.get("#creator-0").type("Creator", {force: true});
-        cy.get("#extension-0").type(".ts", {force: true});
-        cy.get("#year").type("2000", {force: true});
-        cy.get("#wiki").type("https://www.wikipedia.org", {force: true});
+        cy.get("#name").type("Name", { force: true });
+        cy.get("#creator-0").type("Creator", { force: true });
+        cy.get("#extension-0").type(".ts", { force: true });
+        cy.get("#year").type("2000", { force: true });
+        cy.get("#wiki").type("https://www.wikipedia.org", { force: true });
         cy.get("form").children().last().click();
         cy.url().should("eq", "http://localhost:4200/");
       });

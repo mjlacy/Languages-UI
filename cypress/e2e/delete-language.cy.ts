@@ -32,11 +32,11 @@ describe("Delete Language Modal", () => {
 
   it("should close modal on clicking cancel button", () => {
     cy.get("app-delete-language mat-dialog-actions button").first().click();
-    cy.get("mat-dialog-container").should("not.exist", true);
+    cy.get("mat-dialog-container").should("not.exist");
   });
 
   it("should close modal home page on clicking delete button", () => {
     cy.get("app-delete-language mat-dialog-actions button").last().click();
-    cy.get("mat-dialog-container").should("not.exist", true);
+    cy.get("mat-dialog-container").should("not.exist");
   });
 });

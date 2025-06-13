@@ -243,6 +243,6 @@ describe("Language List Page", () => {
   it("should open the delete modal when 'Delete' is clicked", () => {
     cy.wait("@getLanguages");
     cy.get("[data-mat-icon-name='delete']").first().click();
-    cy.get("mat-dialog-container").should("be.visible", true);
+    cy.get("mat-dialog-container").should("be.visible");
   });
 });
