@@ -12,12 +12,12 @@ describe("Edit Language Page", () => {
   });
 
   it("should put language name into name input", function () {
-    cy.get("#name").invoke("val").should("eq", this["languages"].languages[0].name);
+    cy.get("#name").invoke("val").should("eql", this["languages"].languages[0].name);
   });
 
   it("should have label for Name", () => {
     cy.get("#mat-mdc-form-field-label-0").then((label: JQuery<HTMLElement>) => {
-      cy.wrap(label.get(0).innerText).should("eq", "Name");
+      cy.wrap(label.get(0).innerText).should("eql", "Name");
     });
   });
 
@@ -41,13 +41,13 @@ describe("Edit Language Page", () => {
 
   it("should put language creator(s) into creator input(s)", function () {
     cy.get("[formarrayname='creators']").children().first().children("mat-form-field").each((_: JQuery<HTMLElement>, index: number) => {
-      cy.get(`#creator-${index}`).invoke("val").should("eq", this["languages"].languages[0].creators[index]);
+      cy.get(`#creator-${index}`).invoke("val").should("eql", this["languages"].languages[0].creators[index]);
     });
   });
 
   it("should have label for Creator", () => {
     cy.get("#mat-mdc-form-field-label-4").then((label: JQuery<HTMLElement>) => {
-      cy.wrap(label.get(0).innerText).should("eq", "Creator");
+      cy.wrap(label.get(0).innerText).should("eql", "Creator");
     });
   });
 
@@ -72,7 +72,7 @@ describe("Edit Language Page", () => {
   it("should move '+ Add another creator' button after it is clicked", () => {
     cy.get("[formarrayname='creators']").children().children().last().click();
     cy.get("[formarrayname='creators']").children().last().then((additionalCreatorButton: JQuery<HTMLElement>) => {
-      cy.wrap(additionalCreatorButton.get(0).children.item(1)?.tagName).should("eq", "BUTTON");
+      cy.wrap(additionalCreatorButton.get(0).children.item(1)?.tagName).should("eql", "BUTTON");
     });
   });
 
@@ -88,13 +88,13 @@ describe("Edit Language Page", () => {
 
   it("should put language extension(s) into extension input(s)", function () {
     cy.get("[formarrayname='extensions']").children().each((_: JQuery<HTMLElement>, index: number) => {
-      cy.get(`#extension-${index}`).invoke("val").should("eq", this["languages"].languages[0].extensions[index]);
+      cy.get(`#extension-${index}`).invoke("val").should("eql", this["languages"].languages[0].extensions[index]);
     });
   });
 
   it("should have label for Extension", () => {
     cy.get("#mat-mdc-form-field-label-5").then((label: JQuery<HTMLElement>) => {
-      cy.wrap(label.get(0).innerText).should("eq", "Extension");
+      cy.wrap(label.get(0).innerText).should("eql", "Extension");
     });
   });
 
@@ -126,7 +126,7 @@ describe("Edit Language Page", () => {
   it("should move '+ Add another extension' button after it is clicked", () => {
     cy.get("[formarrayname='extensions']").children().children().last().click();
     cy.get("[formarrayname='extensions']").children().last().then((additionalEXtensionButton: JQuery<HTMLElement>) => {
-      cy.wrap(additionalEXtensionButton.get(0).children.item(1)?.tagName).should("eq", "BUTTON");
+      cy.wrap(additionalEXtensionButton.get(0).children.item(1)?.tagName).should("eql", "BUTTON");
     });
   });
 
@@ -137,12 +137,12 @@ describe("Edit Language Page", () => {
   });
 
   it("should put language firstAppeared into firstAppeared input if it is not null", function () {
-    cy.get("#firstAppeared").invoke("val").should("eq", this["languages"].languages[0].firstAppeared ?? "");
+    cy.get("#firstAppeared").invoke("val").should("eql", this["languages"].languages[0].firstAppeared ?? "");
   });
 
   it("should have label for First Appeared", () => {
     cy.get("#mat-mdc-form-field-label-1").then((label: JQuery<HTMLElement>) => {
-      cy.wrap(label.get(0).innerText).should("eq", "First Appeared");
+      cy.wrap(label.get(0).innerText).should("eql", "First Appeared");
     });
   });
 
@@ -166,7 +166,7 @@ describe("Edit Language Page", () => {
         day: "numeric",
         year: "numeric"
       });
-      cy.wrap(element.get(0).ariaLabel).should("eq", currentDateString);
+      cy.wrap(element.get(0).ariaLabel).should("eql", currentDateString);
     });
   });
 
@@ -178,7 +178,7 @@ describe("Edit Language Page", () => {
       day: "numeric",
       year: "numeric"
     });
-    cy.get("#firstAppeared").invoke("val").should("eq", currentDateString);
+    cy.get("#firstAppeared").invoke("val").should("eql", currentDateString);
   });
 
   it("should not set mat-error when firstAppeared input is clicked since firstAppeared is not a required field", () => {
@@ -188,7 +188,7 @@ describe("Edit Language Page", () => {
   });
 
   it("should apply min attribute of 1900-01-01 to firstAppeared input", () => {
-    cy.get("#firstAppeared").invoke("attr", "min").should("eq", "1900-01-01");
+    cy.get("#firstAppeared").invoke("attr", "min").should("eql", "1900-01-01");
   });
 
   it("should apply max attribute of the current date to firstAppeared input", () => {
@@ -196,7 +196,7 @@ describe("Edit Language Page", () => {
     const dayString: string = currentDate.toUTCString().substring(5, 7);
     const monthString: string = (currentDate.getMonth() + 1).toString().padStart(2,"0");
 
-    cy.get("#firstAppeared").invoke("attr", "max").should("eq", `${currentDate.getFullYear()}-${monthString}-${dayString}`);
+    cy.get("#firstAppeared").invoke("attr", "max").should("eql", `${currentDate.getFullYear()}-${monthString}-${dayString}`);
   });
 
   it("should not add mat-error with text on clicking away from cleared firstAppeared input", () => {
@@ -206,7 +206,7 @@ describe("Edit Language Page", () => {
   });
 
   it("should put language name into name input", function () {
-    cy.get("#year").invoke("val").should("eq", this["languages"].languages[0].year.toString());
+    cy.get("#year").invoke("val").should("eql", this["languages"].languages[0].year.toString());
   });
 
   it("should add 'float-above' class to 'Year' label on click", () => {
@@ -237,15 +237,15 @@ describe("Edit Language Page", () => {
   });
 
   it("should apply min attribute of 1900 to year input", () => {
-    cy.get("#year").invoke("attr", "min").should("eq", "1900");
+    cy.get("#year").invoke("attr", "min").should("eql", "1900");
   });
 
   it("should apply max attribute of the current year to year input", () => {
-    cy.get("#year").invoke("attr", "max").should("eq", new Date().getFullYear().toString());
+    cy.get("#year").invoke("attr", "max").should("eql", new Date().getFullYear().toString());
   });
 
   it("should put language name into name input", function () {
-    cy.get("#wiki").invoke("val").should("eq", this["languages"].languages[0].wiki);
+    cy.get("#wiki").invoke("val").should("eql", this["languages"].languages[0].wiki);
   });
 
   it("should add 'float-above' class to 'Wiki' label on click", () => {
@@ -282,7 +282,7 @@ describe("Edit Language Page", () => {
     cy.fixture("mockData.json").as("languages").then(() => {
       cy.setInterceptors(this["languages"]).then(() => {
         cy.get("form").children().last().prev().click();
-        cy.url().should("eq", "http://localhost:4200/");
+        cy.url().should("eql", "http://localhost:4200/");
       });
     });
   });
@@ -306,7 +306,7 @@ describe("Edit Language Page", () => {
     cy.fixture("mockData.json").as("languages").then(() => {
       cy.setInterceptors(this["languages"]).then(() => {
         cy.get("form").children().last().click();
-        cy.url().should("eq", "http://localhost:4200/");
+        cy.url().should("eql", "http://localhost:4200/");
       });
     });
   });

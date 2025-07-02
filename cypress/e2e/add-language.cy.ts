@@ -19,13 +19,13 @@ describe("Add Language Page", () => {
         input = input?.children.item(0);
       }
 
-      cy.wrap(input?.textContent).should("eq", labels[index]);
+      cy.wrap(input?.textContent).should("eql", labels[index]);
     });
   });
 
   it("should have a '+ Add another creator' button next to the last creator input", () => {
     cy.get("[formarrayname='creators']").children().first().then((element: JQuery<HTMLElement>) => {
-      cy.wrap(element.children("button").get(0).innerText).should("eq", "+ Add another creator");
+      cy.wrap(element.children("button").get(0).innerText).should("eql", "+ Add another creator");
     });
   });
 
@@ -37,7 +37,7 @@ describe("Add Language Page", () => {
 
   it("should have a '+ Add another extension' button next to the last extension input", () => {
     cy.get("[formarrayname='extensions']").children().first().then((element: JQuery<HTMLElement>) => {
-      cy.wrap(element.children("button").get(0).innerText).should("eq", "+ Add another extension");
+      cy.wrap(element.children("button").get(0).innerText).should("eql", "+ Add another extension");
     });
   });
 
@@ -49,7 +49,7 @@ describe("Add Language Page", () => {
 
   it("should have cancel button label", () => {
     cy.get("form").children().last().prev().then((element: JQuery<HTMLElement>)=> {
-      cy.wrap(element.get(0).innerText).should("eq", "Cancel");
+      cy.wrap(element.get(0).innerText).should("eql", "Cancel");
     });
   });
 
@@ -61,7 +61,7 @@ describe("Add Language Page", () => {
 
   it("should have submit button label", () => {
     cy.get("form").children().last().then((element: JQuery<HTMLElement>)=> {
-      cy.wrap(element.get(0).innerText).should("eq", "Submit");
+      cy.wrap(element.get(0).innerText).should("eql", "Submit");
     });
   });
 
@@ -119,7 +119,7 @@ describe("Add Language Page", () => {
   it("should move '+ Add another creator' button after it is clicked", () => {
     cy.get("[formarrayname='creators']").children().children().last().click();
     cy.get("[formarrayname='creators']").children().last().then((additionalCreatorButton: JQuery<HTMLElement>) => {
-      cy.wrap(additionalCreatorButton.get(0).children.item(1)?.tagName).should("eq", "BUTTON");
+      cy.wrap(additionalCreatorButton.get(0).children.item(1)?.tagName).should("eql", "BUTTON");
     });
   });
 
@@ -164,7 +164,7 @@ describe("Add Language Page", () => {
   it("should move '+ Add another extension' button after it is clicked", () => {
     cy.get("[formarrayname='extensions']").children().children().last().click();
     cy.get("[formarrayname='extensions']").children().last().then((additionalEXtensionButton: JQuery<HTMLElement>) => {
-      cy.wrap(additionalEXtensionButton.get(0).children.item(1)?.tagName).should("eq", "BUTTON");
+      cy.wrap(additionalEXtensionButton.get(0).children.item(1)?.tagName).should("eql", "BUTTON");
     });
   });
 
@@ -194,7 +194,7 @@ describe("Add Language Page", () => {
          day: "numeric",
          year: "numeric"
        });
-      cy.wrap(element.get(0).ariaLabel).should("eq", currentDateString);
+      cy.wrap(element.get(0).ariaLabel).should("eql", currentDateString);
     });
   });
 
@@ -206,7 +206,7 @@ describe("Add Language Page", () => {
       day: "numeric",
       year: "numeric"
     });
-    cy.get("#firstAppeared").invoke("val").should("eq", currentDateString);
+    cy.get("#firstAppeared").invoke("val").should("eql", currentDateString);
   });
 
   it("should not set mat-error when firstAppeared input is clicked since firstAppeared is not a required field", () => {
@@ -216,7 +216,7 @@ describe("Add Language Page", () => {
   });
 
   it("should apply min attribute of 1900-01-01 to firstAppeared input", () => {
-    cy.get("#firstAppeared").invoke("attr", "min").should("eq", "1900-01-01");
+    cy.get("#firstAppeared").invoke("attr", "min").should("eql", "1900-01-01");
   });
 
   it("should apply max attribute of the current date to firstAppeared input", () => {
@@ -224,7 +224,7 @@ describe("Add Language Page", () => {
     const dayString: string = currentDate.toUTCString().substring(5, 7);
     const monthString: string = (currentDate.getMonth() + 1).toString().padStart(2,"0");
 
-    cy.get("#firstAppeared").invoke("attr", "max").should("eq", `${currentDate.getFullYear()}-${monthString}-${dayString}`);
+    cy.get("#firstAppeared").invoke("attr", "max").should("eql", `${currentDate.getFullYear()}-${monthString}-${dayString}`);
   });
 
   it("should add 'float-above' class to 'Year' label on click", () => {
@@ -255,11 +255,11 @@ describe("Add Language Page", () => {
   });
 
   it("should apply min attribute of 1900 to year input", () => {
-    cy.get("#year").invoke("attr", "min").should("eq", "1900");
+    cy.get("#year").invoke("attr", "min").should("eql", "1900");
   });
 
   it("should apply max attribute of the current year to year input", () => {
-    cy.get("#year").invoke("attr", "max").should("eq", new Date().getFullYear().toString());
+    cy.get("#year").invoke("attr", "max").should("eql", new Date().getFullYear().toString());
   });
 
   it("should add 'float-above' class to 'Wiki' label on click", () => {
@@ -293,7 +293,7 @@ describe("Add Language Page", () => {
     cy.fixture("mockData.json").as("languages").then(() => {
       cy.setInterceptors(this["languages"]).then(() => {
         cy.get("form").children().last().prev().click();
-        cy.url().should("eq", "http://localhost:4200/");
+        cy.url().should("eql", "http://localhost:4200/");
       });
     });
   });
@@ -318,7 +318,7 @@ describe("Add Language Page", () => {
         cy.get("#year").type("2000", { force: true });
         cy.get("#wiki").type("https://www.wikipedia.org", { force: true });
         cy.get("form").children().last().click();
-        cy.url().should("eq", "http://localhost:4200/");
+        cy.url().should("eql", "http://localhost:4200/");
       });
     });
   });
