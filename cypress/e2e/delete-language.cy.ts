@@ -1,15 +1,19 @@
+import {Languages} from "@models/language.model";
+
 describe("Delete Language Modal", () => {
+  let mockLanguages: Languages;
+
   beforeEach(function () {
     cy.fixture("mockData.json").as("languages").then(() => {
-      cy.setInterceptors(this["languages"]).then(() => {
-        cy.visit("/");
-        cy.get("[data-mat-icon-name='delete']").first().click();
-      });
+      mockLanguages = this["languages"];
+      cy.setInterceptors(mockLanguages);
+      cy.visit("/");
+      cy.get("[data-mat-icon-name='delete']").first().click();
     });
   });
 
-  it("should have title with language name", function () {
-    cy.get("app-delete-language h2").contains(`Delete ${this["languages"].languages[0].name}?`);
+  it("should have title with language name", () => {
+    cy.get("app-delete-language h2").contains(`Delete ${mockLanguages.languages[0].name}?`);
   });
 
   it("should have subtitle", () => {

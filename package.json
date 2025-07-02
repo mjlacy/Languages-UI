@@ -15,13 +15,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-eslint/eslint-plugin": "^20.0.0",
+    "@angular-eslint/eslint-plugin": "^20.1.1",
     "@angular/animations": "^20.0.6",
     "@angular/common": "^20.0.6",
     "@angular/compiler": "^20.0.6",
     "@angular/core": "^20.0.6",
     "@angular/forms": "^20.0.6",
-    "@angular/material": "^20.0.3",
+    "@angular/material": "^20.0.4",
     "@angular/platform-browser": "^20.0.6",
     "@angular/platform-browser-dynamic": "^20.0.6",
     "@angular/platform-server": "^20.0.6",
@@ -31,7 +31,7 @@
     "express": "^5.1.0",
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
-    "mocha": "^11.6.0",
+    "mocha": "^11.7.1",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
     "zone.js": "^0.15.1"
@@ -43,9 +43,9 @@
     "@cypress/schematic": "^3.0.0",
     "@types/express": "^5.0.3",
     "@types/jasmine": "^5.1.8",
-    "@types/node": "^22.15.30",
-    "angular-eslint": "^20.0.0",
-    "eslint": "^9.28.0",
+    "@types/node": "^22.16.0",
+    "angular-eslint": "^20.1.1",
+    "eslint": "^9.30.1",
     "jasmine-core": "^5.8.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
@@ -53,7 +53,7 @@
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.1.0",
     "typescript": "^5.8.3",
-    "typescript-eslint": "8.34.0",
-    "cypress": "^14.4.1"
+    "typescript-eslint": "8.35.1",
+    "cypress": "^14.5.1"
   }
 }

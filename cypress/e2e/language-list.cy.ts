@@ -6,9 +6,8 @@ describe("Language List Page", () => {
   beforeEach(function () {
     cy.fixture("mockData.json").as("languages").then(() => {
       mockLanguages = this["languages"];
-      cy.setInterceptors(this["languages"]).then(() => {
-        cy.visit("/");
-      });
+      cy.setInterceptors(mockLanguages);
+      cy.visit("/");
     });
   });
 
