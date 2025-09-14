@@ -10,7 +10,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatIconModule } from "@angular/material/icon";
 import { LanguageService } from "@services/language.service";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from "@angular/common/http";
 import { EmptyPipe } from "@pipes/empty.pipe";
 import { ParseArrayPipe } from "@pipes/parse-array.pipe";
 import { provideAnimations } from "@angular/platform-browser/animations";
@@ -56,7 +56,7 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideAnimations(),
     provideNativeDateAdapter(),
     LanguageService
