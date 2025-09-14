@@ -3,13 +3,14 @@ import {ComponentFixture, TestBed} from "@angular/core/testing";
 import { NgVarDirective } from "./ngVar-directive";
 
 @Component({
-  selector: "app-container",
-  template: `
+    selector: "app-container",
+    template: `
     <div *ngVar="'Test' as TEST">
       <h1>{{ TEST }}</h1>
       <h2 *ngIf="TEST">{{ TEST }} 2</h2>
     </div>
-  `
+  `,
+    standalone: false
 })
 class ContainerComponent {}
 

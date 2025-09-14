@@ -14,9 +14,10 @@ class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-add-language',
-  templateUrl: './add-language.component.html',
-  styleUrl: './add-language.component.scss'
+    selector: 'app-add-language',
+    templateUrl: './add-language.component.html',
+    styleUrl: './add-language.component.scss',
+    standalone: false
 })
 export class AddLanguageComponent implements OnInit {
   currentDate: Date = new Date();

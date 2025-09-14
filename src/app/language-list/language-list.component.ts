@@ -4,14 +4,15 @@ import { Language, LanguagesResp } from '../shared/models/language.model';
 import { LanguageService } from '../services/language.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Observable, catchError, filter, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, catchError, filter, map, of, startWith, switchMap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
 
 @Component({
-  selector: 'app-language-list',
-  templateUrl: './language-list.component.html',
-  styleUrl: './language-list.component.scss'
+    selector: 'app-language-list',
+    templateUrl: './language-list.component.html',
+    styleUrl: './language-list.component.scss',
+    standalone: false
 })
 export class LanguageListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
