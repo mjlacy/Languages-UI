@@ -11,10 +11,9 @@ describe('DeleteLanguageComponent', () => {
       declarations: [DeleteLanguageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(DeleteLanguageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

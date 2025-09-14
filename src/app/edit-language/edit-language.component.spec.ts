@@ -11,10 +11,9 @@ describe('EditLanguageComponent', () => {
       declarations: [EditLanguageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(EditLanguageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
