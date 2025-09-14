@@ -1,30 +1,31 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Language, LanguagesResp } from '../shared/models/language.model';
-import { LanguageService } from '../services/language.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { Observable, catchError, filter, map, of, startWith, switchMap } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DeleteLanguageComponent } from '../delete-language/delete-language.component';
+import { AfterViewInit, Component, inject, ViewChild } from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Language, LanguagesResp } from "../shared/models/language.model";
+import { LanguageService } from "../services/language.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { Observable, catchError, filter, map, of, startWith, switchMap } from "rxjs";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { DeleteLanguageComponent } from "../delete-language/delete-language.component";
 
 @Component({
-    selector: 'app-language-list',
-    templateUrl: './language-list.component.html',
-    styleUrl: './language-list.component.scss',
+    selector: "app-language-list",
+    templateUrl: "./language-list.component.html",
+    styleUrl: "./language-list.component.scss",
     standalone: false
 })
 export class LanguageListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'creators', 'extensions', 'firstAppeared', 'year', 'wiki', 'edit', 'delete'];
+  displayedColumns: string[] = ["name", "creators", "extensions", "firstAppeared", "year", "wiki", "edit", "delete"];
   dataSource: MatTableDataSource<Language> = new MatTableDataSource<Language>();
   total: number = 0;
 
-  constructor(private languageService: LanguageService, public dialog: MatDialog) {}
+  private languageService: LanguageService = inject(LanguageService);
+  private dialog: MatDialog = inject(MatDialog);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   ngAfterViewInit(): void {
-    const paginator = this.paginator as MatPaginator
+    const paginator: MatPaginator = this.paginator as MatPaginator;
 
     this.dataSource.paginator = paginator;
 
@@ -60,7 +61,7 @@ export class LanguageListComponent implements AfterViewInit {
     const dialogRef: MatDialogRef<DeleteLanguageComponent> = this.dialog.open(DeleteLanguageComponent, {
       data: {
         language: language
-      },
+      }
     });
 
     dialogRef

@@ -1,32 +1,32 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { first } from 'rxjs/operators';
-import { Language, LanguagesResp } from '../shared/models/language.model';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "@environments/environment";
+import { first } from "rxjs/operators";
+import { Language, LanguagesResp } from "../shared/models/language.model";
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({"Content-Type": "application/json"})
 };
 
 @Injectable()
 export class LanguageService {
   public readonly LANGUAGE_API_URL = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {}
+  private httpClient: HttpClient = inject(HttpClient);
 
-  getAllLanguages({name = '', creators = [], extensions = [], firstAppeared = '', year = 0, wiki= ''} = {}): Observable<LanguagesResp> {
-    const queryString = '?' + (!!name ? `name=${name}&` : '') + (!!creators.length ? `creators=${creators.toString()}&` : '') +
-      (!!extensions.length ? `extensions=${extensions.toString()}&` : '') + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : '') +
-      (!!year ? `year=${year}&` : '') + (!!wiki ? `wiki=${wiki}&` : '') + 'size=-1';
+  getAllLanguages({name = "", creators = [], extensions = [], firstAppeared = "", year = 0, wiki= ""} = {}): Observable<LanguagesResp> {
+    const queryString = "?" + (!!name ? `name=${name}&` : "") + (!!creators.length ? `creators=${creators.toString()}&` : "") +
+      (!!extensions.length ? `extensions=${extensions.toString()}&` : "") + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : "") +
+      (!!year ? `year=${year}&` : "") + (!!wiki ? `wiki=${wiki}&` : "") + "size=-1";
 
     return this.httpClient.get<LanguagesResp>(`${this.LANGUAGE_API_URL}${queryString}`).pipe(first());
   }
 
-  getLanguages({name = '', creators = [], extensions = [], firstAppeared = '', year = 0, wiki= '', page = 1, size = 10} = {}): Observable<LanguagesResp> {
-    const queryString = '?' + (!!name ? `name=${name}&` : '') + (!!creators.length ? `creators=${creators.toString()}&` : '') +
-      (!!extensions.length ? `extensions=${extensions.toString()}&` : '') + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : '') +
-      (!!year ? `year=${year}&` : '') + (!!wiki ? `wiki=${wiki}&` : '') + `page=${page}&` + `size=${size}`;
+  getLanguages({name = "", creators = [], extensions = [], firstAppeared = "", year = 0, wiki= "", page = 1, size = 10} = {}): Observable<LanguagesResp> {
+    const queryString = "?" + (!!name ? `name=${name}&` : "") + (!!creators.length ? `creators=${creators.toString()}&` : "") +
+      (!!extensions.length ? `extensions=${extensions.toString()}&` : "") + (!!firstAppeared ? `firstAppeared=${firstAppeared}&` : "") +
+      (!!year ? `year=${year}&` : "") + (!!wiki ? `wiki=${wiki}&` : "") + `page=${page}&` + `size=${size}`;
 
     return this.httpClient.get<LanguagesResp>(`${this.LANGUAGE_API_URL}${queryString}`).pipe(first());
   }

@@ -1,23 +1,23 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LanguageListComponent } from './language-list/language-list.component';
-import { AddLanguageComponent } from './add-language/add-language.component';
-import { EditLanguageComponent } from './edit-language/edit-language.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LanguageListComponent } from "./language-list/language-list.component";
+import { AddLanguageComponent } from "./add-language/add-language.component";
+import { EditLanguageComponent } from "./edit-language/edit-language.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: LanguageListComponent,
+    path: "",
+    component: LanguageListComponent
   },
   {
-    path: 'add',
-    component: AddLanguageComponent,
+    path: "add",
+    component: AddLanguageComponent
   },
   {
-    path: 'edit/:_id',
-    component: EditLanguageComponent,
+    path: "edit/:_id",
+    component: EditLanguageComponent
   },
-  { path: '**', component: LanguageListComponent }
+  { path: "**", component: LanguageListComponent }
 ];
 
 @NgModule({

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LanguageListComponent } from './language-list.component';
+import { LanguageListComponent } from "./language-list.component";
 
-describe('LanguageListComponent', () => {
+describe("LanguageListComponent", () => {
   let component: LanguageListComponent;
   let fixture: ComponentFixture<LanguageListComponent>;
 
@@ -11,12 +11,12 @@ describe('LanguageListComponent', () => {
       declarations: [LanguageListComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(LanguageListComponent);
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

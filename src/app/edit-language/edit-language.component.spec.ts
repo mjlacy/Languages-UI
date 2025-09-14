@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditLanguageComponent } from './edit-language.component';
+import { EditLanguageComponent } from "./edit-language.component";
 
-describe('EditLanguageComponent', () => {
+describe("EditLanguageComponent", () => {
   let component: EditLanguageComponent;
   let fixture: ComponentFixture<EditLanguageComponent>;
 
@@ -16,7 +16,7 @@ describe('EditLanguageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

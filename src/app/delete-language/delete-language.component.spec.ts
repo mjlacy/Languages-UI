@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DeleteLanguageComponent } from './delete-language.component';
+import { DeleteLanguageComponent } from "./delete-language.component";
 
-describe('DeleteLanguageComponent', () => {
+describe("DeleteLanguageComponent", () => {
   let component: DeleteLanguageComponent;
   let fixture: ComponentFixture<DeleteLanguageComponent>;
 
@@ -16,7 +16,7 @@ describe('DeleteLanguageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

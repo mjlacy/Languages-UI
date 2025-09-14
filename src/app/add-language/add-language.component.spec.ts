@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddLanguageComponent } from './add-language.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AddLanguageComponent } from "./add-language.component";
 
-describe('AddLanguageComponent', () => {
+describe("AddLanguageComponent", () => {
   let component: AddLanguageComponent;
   let fixture: ComponentFixture<AddLanguageComponent>;
 
@@ -15,7 +15,7 @@ describe('AddLanguageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
