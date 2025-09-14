@@ -38,21 +38,21 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
     DeleteLanguageComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    MatTableModule,
+    BrowserModule,
     MatButtonModule,
-    MatPaginatorModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatDatepickerModule,
-    MatProgressSpinnerModule,
-    MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatDialogTitle
+    MatDialogContent,
+    MatDialogTitle,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
