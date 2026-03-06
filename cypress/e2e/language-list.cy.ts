@@ -178,8 +178,8 @@ describe("Language List Page", () => {
   it("should display 10 languages on page size change", () => {
     cy.wait("@getLanguages");
 
-    cy.get("div .mat-mdc-paginator-page-size-select").click();
-    cy.get("div .mat-mdc-select-panel > :nth-child(2)").click();
+    cy.get(".mat-mdc-paginator-touch-target").click();
+    cy.get("#mat-option-2").click();
 
     cy.get("table tbody").children().then((children: JQuery<HTMLElement>) => {
       cy.wrap(children.length).should("eql", 10);
@@ -189,8 +189,8 @@ describe("Language List Page", () => {
   it("should display 20 languages on page size change", () => {
     cy.wait("@getLanguages");
 
-    cy.get("div .mat-mdc-paginator-page-size-select").click();
-    cy.get("div .mat-mdc-select-panel > :nth-child(3)").click();
+    cy.get(".mat-mdc-paginator-touch-target").click();
+    cy.get("#mat-option-3").click();
 
     cy.get("table tbody").children().then((children: JQuery<HTMLElement>) => {
       cy.wrap(children.length).should("eql", 20);
@@ -200,8 +200,8 @@ describe("Language List Page", () => {
   it("should display all languages on page size change", () => {
     cy.wait("@getLanguages");
 
-    cy.get("div .mat-mdc-paginator-page-size-select").click();
-    cy.get("div .mat-mdc-select-panel > :nth-child(4)").click();
+    cy.get(".mat-mdc-paginator-touch-target").click();
+    cy.get("#mat-option-4").click();
 
     cy.get("table tbody").children().then((children: JQuery<HTMLElement>) => {
       cy.wrap(children.length).should("eql", mockLanguages.languages.length);
@@ -211,10 +211,10 @@ describe("Language List Page", () => {
   it("should display 5 languages on page size change", () => {
     cy.wait("@getLanguages");
 
-    cy.get("div .mat-mdc-paginator-page-size-select").click();
-    cy.get("div .mat-mdc-select-panel > :nth-child(4)").click();
-    cy.get("div .mat-mdc-paginator-page-size-select").click();
-    cy.get("div .mat-mdc-select-panel > :nth-child(1)").click();
+    cy.get(".mat-mdc-paginator-touch-target").click();
+    cy.get("#mat-option-4").click();
+    cy.get(".mat-mdc-paginator-touch-target").click();
+    cy.get("#mat-option-1").click();
 
     cy.get("table tbody").children().then((children: JQuery<HTMLElement>) => {
       cy.wrap(children.length).should("eql", 5);

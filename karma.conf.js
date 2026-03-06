@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri May 30, 2025 21:08:58 GMT-0500 (Central Daylight Time)
 
-module.exports = function(config) {
+export default function(config) {
   config.set({
     angularCli: {
       environment: 'dev',
@@ -73,12 +73,12 @@ module.exports = function(config) {
       ignoreSkipped: true
     },
     plugins: [
-      require("@angular-devkit/build-angular/plugins/karma"),
-      require("karma-chrome-launcher"),
-      require("karma-coverage"),
-      require("karma-jasmine"),
-      require("karma-jasmine-html-reporter"),
-      require("karma-mocha-reporter")
+      "@angular-devkit/build-angular/plugins/karma",
+      "karma-chrome-launcher",
+      "karma-coverage",
+      "karma-jasmine",
+      "karma-jasmine-html-reporter",
+      "karma-mocha-reporter"
     ],
     // web server port
     port: 9876,
